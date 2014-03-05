@@ -1,4 +1,11 @@
 <?php
+    /**
+     * Template principal
+     * 
+     * @author: Guillaume CARAYON
+     * @version : 1.0.0
+     * 
+     */
     $dataView = $_SESSION['dataView'];
 ?>
 <!DOCTYPE html>

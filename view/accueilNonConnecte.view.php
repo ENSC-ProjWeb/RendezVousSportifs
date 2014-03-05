@@ -1,3 +1,12 @@
+<?php
+    /**
+     * Vue accueil non connecté
+     * 
+     * @author: Guillaume CARAYON
+     * @version: 1.0.0
+     * 
+     */
+?>
 <table width="50%">
     <?php
         for ($i = 0; $i<4; $i++)

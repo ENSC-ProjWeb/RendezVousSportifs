@@ -1,3 +1,12 @@
+<?php
+    /**
+     * Vue menu non connecté
+     * 
+     * @author: Guillaume CARAYON
+     * @version: 1.0.0.
+     */
+?>
+
 <!-- Zone pour la connexion -->
 <div id='zoneConnexion'>
     <form method='POST' action='index.php?action=seConnecter'>

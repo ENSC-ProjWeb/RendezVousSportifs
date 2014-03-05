@@ -6,7 +6,6 @@
  * @author: Guillaume CARAYON 
  * @version : 1.0.1
  * 
- * @todo : enlever les vérifications inutiles
  */
 
 include "config.php";
@@ -36,7 +35,7 @@ if (!$isAllowed) {
 
 // On fait appel à l'action demandée
 if (!file_exists($acts[$userQuery])) {
-    echo utf8_decode("Veuillez vérifier que l'action demandée $userQuery est bien configuré <br/>");
+    echo utf8_decode("Veuillez vérifier que l'action demandée $userQuery est bien existante <br/>");
 } else {
     include $acts[$userQuery];
 }

@@ -1,6 +1,12 @@
 <?php
 
-/* 
+/**
+ * Initialiser
+ * 
+ * Action qui initialise la page d'accueil (etat nonConnecte_accueil)
+ * 
+ * @author: Guillaume CARAYON
+ * @version : 1.0.0
  * 
  */
 
