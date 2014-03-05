@@ -1,0 +1,35 @@
+/* CSS : Style principal */
+body
+{
+    
+}
+
+#zoneHaute
+{
+    text-align: center;   
+}
+
+#zoneRecherche
+{
+    width:60em;
+    margin-top: 0.5em;
+    margin-left: 10em;
+    margin-right: auto;
+    border: 0.05em solid black;
+    
+}
+
+#zoneMenu
+{
+    
+}
+
+#zoneCentrale
+{
+    
+}
+
+
+
+
+
