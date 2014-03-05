@@ -59,5 +59,7 @@ $states = array();
 $states['nonConnecte_accueil'] = array('displayTpl' => 'tplPrincipal',
     'allowedActs' => array('initialiser'));
 
+$states['nonConnecte_enregistrement'] = array('display' => 'tplPrincipal',
+        'allowedActs' => array('initialiser'));
 
 
