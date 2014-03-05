@@ -1,7 +1,11 @@
 <?php
-/* FICHIER DE CONFIGURATION
- * CONTIENT TOUTES LES VARIABLES NECESSAIRES AU BON FONCTIONNEMENT DE L'APPLICATION
- * DEFINITION DE LA STRUCTURATION DU CODE
+/**
+ * Fichier de configuration du contrôleur
+ * 
+ * @author: Gabriel BELLAKHDAR
+ * @author: Guillaume CARAYON
+ * 
+ * @todo: compléter la liste des états
  */
 
 include "listerFichiers.php";

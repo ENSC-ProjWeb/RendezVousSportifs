@@ -1,11 +1,13 @@
 <?php
 
-/* Fonction listerFichiers
- * Fonction pour lister les fichiers d'un répertoire
- * Prend en paramètre le répertoire sous les formes suivantes : 
- *  - "nomRep/*.typeFichier.terminaisonFichier
- *  - "nomRep/*.terminaisonFichier
- * Retourne un tableau indicé de la forme : $res['nomFichier'] = 'emplacement'
+/**
+ *  Lister les emplacements fichiers dans un tableau indicé avec les noms des fichiers
+ * 
+ * @author : Guillaume CARAYON
+ * @version : 1.0.0
+ * 
+ * @params string $maskPattern  Chaîne de caractère de type "rep/*.tF.ext" ou "rep/*.ext"
+ * @return tableau avec les emplacements des fichiers indicé avec les noms des fichiers 
  */
 
 function listerFichiers($maskPattern)

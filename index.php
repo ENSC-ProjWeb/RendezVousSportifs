@@ -1,6 +1,7 @@
 <?php
 
-/* Fichier contrôleur
+/**
+ * Fichier contrôleur
  *
  * @author: Guillaume CARAYON 
  * @version : 1.0.1

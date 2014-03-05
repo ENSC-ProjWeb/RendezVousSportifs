@@ -1,11 +1,7 @@
 <?php
 
-/* Nom : initialiser
- * Rôle : Initialisation de la page d'accueil
- * Réalisé par : Guillaume CARAYON
- * Création le : 3/03/2014
- * Modifications :
- *      - 3/03/2014 : création
+/* 
+ * 
  */
 
 // -------------------------------------------------------
