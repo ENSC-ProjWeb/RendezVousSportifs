@@ -1,5 +1,13 @@
 <?php
 
+/* Fichier contrôleur
+ *
+ * @author: Guillaume CARAYON 
+ * @version : 1.0.1
+ * 
+ * @todo : enlever les vérifications inutiles
+ */
+
 include "config.php";
 
 // On démarre ou on relance la session précédente
