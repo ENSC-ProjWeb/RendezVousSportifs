@@ -1,4 +1,7 @@
-/* CSS : Style principal */
+/** 
+ * CSS : Style principal
+ * 
+*/
 body
 {
     
@@ -15,19 +18,30 @@ body
     margin-top: 0.5em;
     margin-left: 10em;
     margin-right: auto;
-    border: 0.05em solid black;
-    
+    border: 0.05em solid black;   
 }
 
 #zoneMenu
 {
-    
+    position: absolute;
+    width: 20em;
+    margin-left: 1em;
+}
+
+#zoneMenu #zoneConnexion, #zoneMenu #zoneCalendrier, #zoneMenu #zoneMenuSports
+{
+    border: 0.05em solid black;
+    padding-left: 0.75em;
+    padding-bottom: 0.75em;
+    margin-top: 2em;
 }
 
 #zoneCentrale
 {
-    
-}
+    position: relative;
+    margin-left: 25em;
+    margin-top: 1.5em;
+} 
 
 
 
