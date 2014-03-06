@@ -24,7 +24,7 @@ body
 #zoneMenu
 {
     position: absolute;
-    width: 20em;
+    width: 5em;
     margin-left: 1em;
 }
 
@@ -33,6 +33,7 @@ body
     border: 0.05em solid black;
     padding-left: 0.75em;
     padding-bottom: 0.75em;
+    padding-right: 0.75em;
     margin-top: 2em;
 }
 
