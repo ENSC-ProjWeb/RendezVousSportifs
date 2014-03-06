@@ -19,8 +19,8 @@
                 <td><input type='password' size='25' name='password' id='password' placeholder="Mot de passe" required/></td>
             </tr>
             <tr>
-                <td><a href="index.php?action=inscrire">S'inscrire</a></td>
-                <td><input type="submit" value="Se connecter" name="btnSeConnecter" id="btnSeConnecter"/></td>
+                <td><a href="index.php?action=inscrire">S'inscrire</a>
+                    <input type="submit" value="Se connecter" name="btnSeConnecter" id="btnSeConnecter"/></td>
             </tr>
         </table>
     </form>
