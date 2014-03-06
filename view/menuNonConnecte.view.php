@@ -13,12 +13,10 @@
         <h3> Connectez-vous </h3>
         <table>
             <tr>
-                <td><label for='login'>Login : </label></td>
-                <td><input type='text' size='25' name='login' id='login'/><br/></td>
+                <td><input type='text' size='25' name='login' id='login' placeholder="Login" required/></td>
             </tr>
             <tr>
-                <td><label for='password'>Mot de passe : </label></td>
-                <td><input type='password' size='25' name='password' id='password'><br/></td>
+                <td><input type='password' size='25' name='password' id='password' placeholder="Mot de passe" required/></td>
             </tr>
             <tr>
                 <td><a href="index.php?action=inscrire">S'inscrire</a></td>
