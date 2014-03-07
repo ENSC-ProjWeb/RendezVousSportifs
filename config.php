@@ -60,6 +60,6 @@ $states['nonConnecte_accueil'] = array('displayTpl' => 'tplPrincipal',
     'allowedActs' => array('initialiser', 'inscrire'));
 
 $states['nonConnecte_enregistrement'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser'));
+        'allowedActs' => array('initialiser', 'validerInscription'));
 
 
