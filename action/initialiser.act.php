@@ -6,8 +6,8 @@
  * Action qui initialise la page d'accueil (etat nonConnecte_accueil)
  * 
  * @author: Guillaume CARAYON
- * @version : 1.0.0
- * 
+ * @version: 1.0.0
+ * @todo: Tout va bien
  */
 
 // -------------------------------------------------------
