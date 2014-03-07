@@ -35,7 +35,7 @@ if (!$isAllowed) {
 
 // On fait appel à l'action demandée
 if (!file_exists($acts[$userQuery])) {
-    echo utf8_decode("Veuillez vérifier que l'action demandée $userQuery est bien existante <br/>");
+    echo "Veuillez v&eacute;rifier que l'action demand&eacute;e $userQuery est bien existante <br/>";
 } else {
     include $acts[$userQuery];
 }
@@ -45,7 +45,7 @@ $actState = $_SESSION['state'];
 $tplToDisplay = $states[$actState]['displayTpl'];
 $fileTpl = $tpls[$tplToDisplay];
 if (!file_exists($fileTpl)) {
-    echo utf8_decode("Veuillez vérifier que le template demandé $tplToDisplay est bien configuré <br/>");
+    echo "Veuillez v&eacute;rifier que le template demand&eacute; $tplToDisplay est bien configur&eacute; <br/>";
 } else {
     include $fileTpl;
 }
