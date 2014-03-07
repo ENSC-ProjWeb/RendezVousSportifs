@@ -1,0 +1,148 @@
+# Généré à partir d'ANALYSESI
+
+# A implémenter par importantion dans PHPMyAdmin
+# use BDDProjetSiteWeb ;
+
+# Table PARTICIPANT
+DROP TABLE IF EXISTS PARTICIPANT ;
+CREATE TABLE PARTICIPANT (idParticipant INT(4) AUTO_INCREMENT NOT NULL,
+nomParticipant VARCHAR(25),
+prenomParticipant VARCHAR(25),
+genreParticipant VARCHAR(1),
+dateNaissanceParticipant DATE,
+idUser INT(4) NOT NULL,
+idAdresse INT(3) NOT NULL,
+PRIMARY KEY (idParticipant) ) ENGINE=InnoDB;
+
+# Table ORGANISATEUR
+DROP TABLE IF EXISTS ORGANISATEUR ;
+CREATE TABLE ORGANISATEUR (idOrganisateur INT(3) AUTO_INCREMENT NOT NULL,
+nomOrganisateur VARCHAR(25),
+typeOrganisateur VARCHAR(25),
+nomRef VARCHAR(25),
+prenomRef VARCHAR(25),
+telRef VARCHAR(10),
+mailRef VARCHAR(50),
+idUser INT(4) NOT NULL,
+idAdresse INT(3) NOT NULL,
+PRIMARY KEY (idOrganisateur) ) ENGINE=InnoDB;
+
+# Table EVENEMENT
+DROP TABLE IF EXISTS EVENEMENT ;
+CREATE TABLE EVENEMENT (idEvent INT(5) AUTO_INCREMENT NOT NULL,
+nomEvent VARCHAR(25),
+nbParticipantsMax INT(4),
+nbParticipantsMin INT(4),
+prixEvent FLOAT(4),
+descriptionEvent TEXT,
+debutEvent TIME,
+finEvent TIME,
+idAdresse INT(3) NOT NULL,
+PRIMARY KEY (idEvent) ) ENGINE=InnoDB;
+
+# Table SPORT
+DROP TABLE IF EXISTS SPORT ;
+CREATE TABLE SPORT (idSport INT(4) AUTO_INCREMENT NOT NULL,
+nomSport INT(20),
+PRIMARY KEY (idSport) ) ENGINE=InnoDB;
+
+# Table MESSAGE
+DROP TABLE IF EXISTS MESSAGE ;
+CREATE TABLE MESSAGE (idMessage INT(5) AUTO_INCREMENT NOT NULL,
+sujetMessage VARCHAR(100),
+texteMessage TEXT,
+dateMessage DATE,
+heureMessage TIME,
+PRIMARY KEY (idMessage) ) ENGINE=InnoDB;
+
+# Table UTILISATEUR
+DROP TABLE IF EXISTS UTILISATEUR ;
+CREATE TABLE UTILISATEUR (idUser INT(4) AUTO_INCREMENT NOT NULL,
+loginUser VARCHAR(25),
+mdpUser VARCHAR(128),
+mailUser VARCHAR(50),
+telUser VARCHAR(10),
+descUser TEXT,
+idParticipant INT(4),
+idOrganisateur INT(3),
+idImage INT(5),
+PRIMARY KEY (idUser) ) ENGINE=InnoDB;
+
+# Table ADRESSE
+DROP TABLE IF EXISTS ADRESSE ;
+CREATE TABLE ADRESSE (idAdresse INT(3) AUTO_INCREMENT NOT NULL,
+numVoieAdresse INT(3),
+nomVoieAdresse VARCHAR(50),
+cptAdresse VARCHAR(50),
+codePostalAdresse VARCHAR(5),
+villeAdresse VARCHAR(50),
+dptAdresse VARCHAR(50),
+regionAdresse VARCHAR(25),
+paysAdresse VARCHAR(25),
+PRIMARY KEY (idAdresse) ) ENGINE=InnoDB;
+
+# Table IMAGE
+DROP TABLE IF EXISTS IMAGE ;
+CREATE TABLE IMAGE (idImage INT(5) AUTO_INCREMENT NOT NULL,
+nomImage VARCHAR(25),
+cibleImage VARCHAR(50),
+PRIMARY KEY (idImage) ) ENGINE=InnoDB;
+
+# Table ORGANISER : regroupe les organisateurs et les événements associés
+DROP TABLE IF EXISTS ORGANISER ;
+CREATE TABLE ORGANISER (idOrganisateur INT(3) AUTO_INCREMENT NOT NULL,
+idEvent INT(5) NOT NULL,
+PRIMARY KEY (idOrganisateur,
+ idEvent) ) ENGINE=InnoDB;
+
+# Table REGROUPER : regroupe les sports associées aux événements
+DROP TABLE IF EXISTS REGROUPER ;
+CREATE TABLE REGROUPER (idEvent INT(5) AUTO_INCREMENT NOT NULL,
+idSport INT(4) NOT NULL,
+PRIMARY KEY (idEvent,
+ idSport) ) ENGINE=InnoDB;
+
+# Table ENVOYER : regroupe les messages associés aux événements et à l'utilisateur
+DROP TABLE IF EXISTS ENVOYER ;
+CREATE TABLE ENVOYER (idEvent INT(5) AUTO_INCREMENT NOT NULL,
+idMessage INT(5) NOT NULL,
+idUser INT(4) NOT NULL,
+PRIMARY KEY (idEvent,
+ idMessage,
+ idUser) ) ENGINE=InnoDB;
+
+# Table CONTENIR : associe les images aux événements
+DROP TABLE IF EXISTS CONTENIR ;
+CREATE TABLE CONTENIR (idEvent INT(5) AUTO_INCREMENT NOT NULL,
+idImage INT(5) NOT NULL,
+PRIMARY KEY (idEvent,
+ idImage) ) ENGINE=InnoDB;
+
+# Table INSCRIRE : associe les participants aux événements et à leur statut
+DROP TABLE IF EXISTS Inscrire ;
+CREATE TABLE Inscrire (idParticipant INT(4) AUTO_INCREMENT NOT NULL,
+idEvent INT(5) NOT NULL,
+statutInscription VARCHAR(2),
+PRIMARY KEY (idParticipant,
+ idEvent) ) ENGINE=InnoDB;
+
+# Ajout des contraintes de clé étrangères
+ALTER TABLE PARTICIPANT ADD CONSTRAINT FK_PARTICIPANT_idUser FOREIGN KEY (idUser) REFERENCES UTILISATEUR (idUser);
+ALTER TABLE PARTICIPANT ADD CONSTRAINT FK_PARTICIPANT_idAdresse FOREIGN KEY (idAdresse) REFERENCES ADRESSE (idAdresse);
+ALTER TABLE ORGANISATEUR ADD CONSTRAINT FK_ORGANISATEUR_idUser FOREIGN KEY (idUser) REFERENCES UTILISATEUR (idUser);
+ALTER TABLE ORGANISATEUR ADD CONSTRAINT FK_ORGANISATEUR_idAdresse FOREIGN KEY (idAdresse) REFERENCES ADRESSE (idAdresse);
+ALTER TABLE EVENEMENT ADD CONSTRAINT FK_EVENEMENT_idAdresse FOREIGN KEY (idAdresse) REFERENCES ADRESSE (idAdresse);
+ALTER TABLE UTILISATEUR ADD CONSTRAINT FK_UTILISATEUR_idParticipant FOREIGN KEY (idParticipant) REFERENCES PARTICIPANT (idParticipant);
+ALTER TABLE UTILISATEUR ADD CONSTRAINT FK_UTILISATEUR_idOrganisateur FOREIGN KEY (idOrganisateur) REFERENCES ORGANISATEUR (idOrganisateur);
+ALTER TABLE UTILISATEUR ADD CONSTRAINT FK_UTILISATEUR_idImage FOREIGN KEY (idImage) REFERENCES IMAGE (idImage);
+ALTER TABLE Organiser ADD CONSTRAINT FK_Organiser_idOrganisateur FOREIGN KEY (idOrganisateur) REFERENCES ORGANISATEUR (idOrganisateur);
+ALTER TABLE Organiser ADD CONSTRAINT FK_Organiser_idEvent FOREIGN KEY (idEvent) REFERENCES EVENEMENT (idEvent);
+ALTER TABLE Regrouper ADD CONSTRAINT FK_Regrouper_idEvent FOREIGN KEY (idEvent) REFERENCES EVENEMENT (idEvent);
+ALTER TABLE Regrouper ADD CONSTRAINT FK_Regrouper_idSport FOREIGN KEY (idSport) REFERENCES SPORT (idSport);
+ALTER TABLE Envoyer ADD CONSTRAINT FK_Envoyer_idEvent FOREIGN KEY (idEvent) REFERENCES EVENEMENT (idEvent);
+ALTER TABLE Envoyer ADD CONSTRAINT FK_Envoyer_idMessage FOREIGN KEY (idMessage) REFERENCES MESSAGE (idMessage);
+ALTER TABLE Envoyer ADD CONSTRAINT FK_Envoyer_idUser FOREIGN KEY (idUser) REFERENCES UTILISATEUR (idUser);
+ALTER TABLE Contenir ADD CONSTRAINT FK_Contenir_idEvent FOREIGN KEY (idEvent) REFERENCES EVENEMENT (idEvent);
+ALTER TABLE Contenir ADD CONSTRAINT FK_Contenir_idImage FOREIGN KEY (idImage) REFERENCES IMAGE (idImage);
+ALTER TABLE Inscrire ADD CONSTRAINT FK_Inscrire_idParticipant FOREIGN KEY (idParticipant) REFERENCES PARTICIPANT (idParticipant);
+ALTER TABLE Inscrire ADD CONSTRAINT FK_Inscrire_idEvent FOREIGN KEY (idEvent) REFERENCES EVENEMENT (idEvent);
