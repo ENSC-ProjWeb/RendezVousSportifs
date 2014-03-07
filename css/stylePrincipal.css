@@ -1,11 +1,12 @@
 /** 
  * CSS : Style principal
- * 
+ *
+ * Feuille de style du template principale et des fragments de vues qui en découlent
+ *
+ * @author: Guillaume CARAYON
+ * @version: 1.0.1
+ *
 */
-body
-{
-    
-}
 
 #zoneHaute
 {
@@ -14,17 +15,15 @@ body
 
 #zoneRecherche
 {
-    width:60em;
-    margin-top: 0.5em;
-    margin-left: 10em;
-    margin-right: auto;
+    width:50em;
+    margin: 0 auto;
     border: 0.05em solid black;   
 }
 
 #zoneMenu
 {
     position: absolute;
-    width: 5em;
+    width: 15em;
     margin-left: 1em;
 }
 
@@ -40,9 +39,9 @@ body
 #zoneCentrale
 {
     position: relative;
-    margin-left: 25em;
+    margin-left: 20em;
     margin-top: 1.5em;
-} 
+}
 
 
 
