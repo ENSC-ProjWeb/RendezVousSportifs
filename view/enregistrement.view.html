@@ -3,12 +3,10 @@
  * Vue enregistrement
  * 
  * @author: Guillaume CARAYON
- * @version: 1.0.0
+ * @version: 1.0.1
  * 
- * @todo: Mettre en place upload avatar
- * @todo: Faire la partie Participant
+ * @todo: Améliorer ergonomie formulaire
  * @todo: Améliorer affichage pour l'adresse
- * @todo: Rajouter bouton submit
  */
 -->
 
@@ -35,6 +33,8 @@
 </script>
 
 <h2> Enregistrement </h2>
+
+<a href="index.php?action=initialiser"> Revenir &agrave; l'accueil </a> <br/><br/>
 
 <form method="POST" action="index.php?action=enregistrer">
     <fieldset>
@@ -171,25 +171,27 @@
         <em> Les informations que vous saisissez ici nous permettent de localiser au mieux les &eacute;v&eacute;nements proches de vous<br/></em>
         <table>
             <tr>
-                <td colpsan="2"><input type="text" size="3" name="numVoie" placeholder="Num"/>
-                    <input type="text" size="50" name="nomVoie" placeholder="Rue, Voie, Boulevard..."/></td>
+                <td><input type="text" size="3" width="3" name="numVoie" placeholder="Num"/>
+                    <input type="text" size="50" width="97" name="nomVoie" placeholder="Rue, Voie, Boulevard..."/></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="text" size="50" name="cptVoie" placeholder="B&acirc;timent, Appartement..."/></td>
+                <td><input type="text" size="50" width="100" name="cptVoie" placeholder="B&acirc;timent, Appartement..."/></td>
             </tr>
             <tr>
-                <td><input type="text" size="5" name="cpAdresse" placeholder="Code postal"/></td>
-                <td><input type="text" size="50" name="villeAdresse" placeholder="Ville"/></td>
+                <td><input type="text" size="5" width="10" name="cpAdresse" placeholder="Code Postal"/>
+                    <input type="text" size="50" width="90" name="villeAdresse" placeholder="Ville"/></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="text" size="50" name="dptAdresse" placeholder="D&eacute;partement"/>
+                <td><input type="text" size="50" name="dptAdresse" placeholder="D&eacute;partement"/>
                     <input type="text" size="50" name="regionAdresse" placeholder="R&eacute;gion"/></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="text" size="50" name="paysAdresse" placeholder="Pays"/></td>
+                <td><input type="text" size="50" width="100" name="paysAdresse" placeholder="Pays"/></td>
             </tr>
         </table>
     </fieldset>
+    <br/>
+    <input type="submit" value="S'enregistrer"/>
 </div>
 
 </form>
