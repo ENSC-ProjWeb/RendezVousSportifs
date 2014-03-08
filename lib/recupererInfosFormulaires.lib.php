@@ -10,15 +10,14 @@
  * 
  */
 
- /**
-  * RecupererInfosGlobales
-  * 
-  * Permet de récupérer les informations globales d'un formulaire d'enregistrement
-  * 
-  * @return un tableau indicé avec les noms des champs des formulaires
-  */
-function recupererInfosGlobales()
-{
+/**
+ * RecupererInfosGlobales
+ * 
+ * Permet de récupérer les informations globales d'un formulaire d'enregistrement
+ * 
+ * @return un tableau indicé avec les noms des champs des formulaires
+ */
+function recupererInfosGlobales() {
     return array(
         "typeCompte" => $_POST["typeCompte"],
         "login" => $_POST["login"],
@@ -39,8 +38,7 @@ function recupererInfosGlobales()
  * 
  * @return un tableau indicé avec les noms des champs des formulaires
  */
-function recupererInfosParticipant()
-{
+function recupererInfosParticipant() {
     return array(
         "nomParticipant" => $_POST["nomParticipant"],
         "prenomParticipant" => $_POST["prenomParticipant"],
@@ -49,7 +47,6 @@ function recupererInfosParticipant()
     );
 }
 
-
 /**
  * RecupererInfosOrganisateur
  * 
@@ -57,8 +54,7 @@ function recupererInfosParticipant()
  * 
  * @return un tableau indicé avec les noms des champs des formulaires
  */
-function recupererInfosOrganisateur()
-{
+function recupererInfosOrganisateur() {
     return array(
         "nomOrganisation" => $_POST["nomOrganisation"],
         "typeOrganisation" => $_POST["typeOrganisation"],
@@ -76,8 +72,7 @@ function recupererInfosOrganisateur()
  * 
  * @return un tableau indicé avec les noms des champs des formulaires
  */
-function recupererInfosLocalisation()
-{
+function recupererInfosLocalisation() {
     return array(
         "numVoie" => $_POST["numVoie"],
         "nomVoie" => $_POST["nomVoie"],
@@ -89,6 +84,3 @@ function recupererInfosLocalisation()
         "paysAdresse" => $_POST["paysAdresse"]
     );
 }
-
-
-
