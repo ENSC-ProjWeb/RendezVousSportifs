@@ -7,10 +7,8 @@
  * @version : 1.0.1
  * 
  */
-
 include "config.php";
-foreach($libs as $nomLib => $emplacementlib)
-{
+foreach ($libs as $nomLib => $emplacementlib) {
     include $emplacementLib;
 }
 // On démarre ou on relance la session précédente
@@ -26,7 +24,6 @@ if (!isset($_SESSION['state'])) {
 
 $userQuery = $_REQUEST['action'];        // requête utilisateur
 $actState = $_SESSION['state'];  // état actuel
-
 // On vérifie que la requête utilisateur est autorisée pour l'état actuel
 $allowedQueries = $states[$actState]['allowedActs'];
 $isAllowed = in_array($userQuery, $allowedQueries);
@@ -36,10 +33,19 @@ if (!$isAllowed) {
     $userQuery = $falseAct;
 }
 
-// On fait appel à l'action demandée
+// On fait appel à l'action demandée en incluant le(s) modèle(s) utilisés
 if (!file_exists($acts[$userQuery])) {
     echo "Veuillez v&eacute;rifier que l'action demand&eacute;e $userQuery est bien existante <br/>";
 } else {
+    $modelsUsed = $states[$actState]["usingModels"];
+    foreach ($modelsUsed as $model) {
+        $loc = $models[$model];
+        if (!file_exists($loc)) {
+            echo "Veuillez v&eacute;rifier que le mod&egrave;le $model existe !";
+        } else {
+            include $loc;
+        }
+    }
     include $acts[$userQuery];
 }
 
