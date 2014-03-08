@@ -21,8 +21,8 @@ function recupererInfosGlobales() {
     return array(
         "typeCompte" => $_POST["typeCompte"],
         "login" => $_POST["login"],
-        "password" => $_POST["password"],
-        "confirmPassword" => $_POST["confirmPassword"],
+        "password" => hashPassword($_POST["password"]),
+        "confirmPassword" => hashPassword($_POST["confirmPassword"]),
         "adresseMail" => $_POST["adresseMail"],
         "confirmMail" => $_POST["confirmMail"],
         "numTel" => $_POST["numTel"],
