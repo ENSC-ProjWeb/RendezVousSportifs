@@ -36,7 +36,7 @@
 
 <a href="index.php?action=initialiser"> Revenir &agrave; l'accueil </a> <br/><br/>
 
-<form method="POST" action="index.php?action=validerInscription">
+<form method="POST" action="index.php?action=validerInscription" enctype="multipart/form-data">
     <fieldset>
         <legend> Mon type de compte </legend>
         <table>
@@ -107,7 +107,8 @@
                 </tr>
                 <tr>
                     <td><label for="uploadAvatar">Photo de profil :</label></td>
-                    <td><input type="file" name="uploadAvatar" /></td>
+                    <td><input type="hidden" name="MAX_FILE_SIZE" value="2097152"/>
+                        <input type="file" name="uploadAvatar" /></td>
                 </tr>
             </table>
 
