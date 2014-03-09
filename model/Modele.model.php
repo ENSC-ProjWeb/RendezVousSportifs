@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @abstract: Modele
+ * 
+ * Classe Modele pour les différentes données à récupérer
+ * 
+ */
+
 abstract class Modele {
 
   // Objet PDO d'accès à la BD
