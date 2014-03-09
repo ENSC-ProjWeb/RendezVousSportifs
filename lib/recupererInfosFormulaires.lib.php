@@ -19,14 +19,14 @@
  */
 function recupererInfosGlobales() {
     return array(
-        "typeCompte" => $_POST["typeCompte"],
-        "login" => $_POST["login"],
-        "password" => hashPassword($_POST["password"]),
-        "confirmPassword" => hashPassword($_POST["confirmPassword"]),
-        "adresseMail" => $_POST["adresseMail"],
-        "confirmMail" => $_POST["confirmMail"],
-        "numTel" => $_POST["numTel"],
-        "desc" => htmlentities($_POST["desc"]),
+        "typeCompte" => filter_input(INPUT_POST, 'typeCompte'),
+        "login" => filter_input(INPUT_POST, 'login'),
+        "password" => filter_input(INPUT_POST, 'password'),
+        "confirmPassword" => filter_input(INPUT_POST, 'confirmPassword'),
+        "adresseMail" => filter_input(INPUT_POST, 'adresseMail'),
+        "confirmMail" => filter_input(INPUT_POST, 'confirmMail'),
+        "numTel" => filter_input(INPUT_POST, 'numTel'),
+        "desc" => filter_input(INPUT_POST, 'desc'),
         "uploadAvatar" => $_FILES["uploadAvatar"]
     );
 }
