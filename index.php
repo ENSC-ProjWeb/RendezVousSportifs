@@ -4,7 +4,7 @@
  * Fichier contrôleur
  *
  * @author: Guillaume CARAYON 
- * @version : 1.0.1
+ * @version : 1.1.0
  * 
  */
 include "config.php";
@@ -15,7 +15,7 @@ foreach ($libs as $nomLib => $emplacementlib) {
 session_start();
 
 // On définit au préalable l'action et l'état en cours à l'action d'initialisation et à l'état initial
-if (!isset($_REQUEST['action'])) {
+if (!isset(filter_input(INPUT_REQUEST, 'action'))) {
     $_REQUEST['action'] = $initAct;
 }
 if (!isset($_SESSION['state'])) {
@@ -50,8 +50,8 @@ if (!file_exists($acts[$userQuery])) {
 }
 
 // On récupère le nouvel état de l'application et on affiche le template correspondant
-$actState = $_SESSION['state'];
-$tplToDisplay = $states[$actState]['displayTpl'];
+$newState = $_SESSION['state'];
+$tplToDisplay = $states[$newState]['displayTpl'];
 $fileTpl = $tpls[$tplToDisplay];
 if (!file_exists($fileTpl)) {
     echo "Veuillez v&eacute;rifier que le template demand&eacute; $tplToDisplay est bien configur&eacute; <br/>";
