@@ -29,7 +29,7 @@ abstract class Modele {
     if ($this->bdd == null) {
       // Création de la connexion
       $this->bdd = new PDO(DNS.';charset=utf8',
-        'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        LOGIN, PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
     return $this->bdd;
   }
