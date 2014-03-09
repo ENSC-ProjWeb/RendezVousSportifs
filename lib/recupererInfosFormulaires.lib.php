@@ -27,7 +27,7 @@ function recupererInfosGlobales() {
         "confirmMail" => $_POST["confirmMail"],
         "numTel" => $_POST["numTel"],
         "desc" => htmlentities($_POST["desc"]),
-        "uploadAvatar" => $_POST["uploadAvatar"]
+        "uploadAvatar" => $_FILES["uploadAvatar"]
     );
 }
 
