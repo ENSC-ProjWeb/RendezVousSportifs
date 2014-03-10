@@ -38,7 +38,7 @@ $dataView['title']=TITLE." - Accueil";
 $dataView['zoneHaute']=$views['banniere'];
 $dataView['zoneRecherche']=$views['recherche'];
 $dataView['zoneMenu']=$views['menuNonConnecte'];
-$dataView['zoneCentrale']=$views['accueilNonConnecte'];
+$dataView['zoneCentrale']=$views['accueil'];
 $dataView['css']=$css['stylePrincipal'];
 
 // Enregistrement des donnees de la vue dans la session
