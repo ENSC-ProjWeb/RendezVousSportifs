@@ -90,3 +90,18 @@ function retournerMessageErreurVerifLoc($verifLoc) {
 
     return $message;
 }
+
+
+function retournerMessageErreurVerifUpload($resUpload) {
+    switch ($resUpload) {
+        case FAIL_UPLOAD : $message = "L'upload a échoué !"; break;
+        case UNMATCH_MIME_TYPE : $message = "Le type n'est pas valide !"; break;
+        case BAD_TYPE : $message = "Le type n'est pas valide !"; break;
+        case HEAVY_FILE : $message = "Le fichie est trop lourd !"; break;
+        case ERROR_FILE : $message = "Erreur lors de l'upload"; break;
+        case EMPTY_FILE : $message = "Le fichier est vide !"; break;
+        default: $message = "Upload non valide";
+    }
+    
+    return $message;
+}
