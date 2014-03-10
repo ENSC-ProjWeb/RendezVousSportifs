@@ -6,9 +6,6 @@
  * @author Guillaume
  * @version 1.0.0
  */
-include $models["Modele"];
-include $models["Utilisateur"];
-include $models["Adresse"];
 
 class Participant extends Modele {
 
@@ -36,7 +33,7 @@ class Participant extends Modele {
                     "dateNaissanceParticipant" => $infosParticipant["dateNaissanceParticipant"],
                     "loginUser" => $infosGlob["login"],
                     "idAdresse" => "(SELECT LAST_INSERT_ID() FROM ADRESSE)");
-                $insertParticipant = executerRequete($reqParticipant, $paramsParticipant);
+                $insertParticipant = $this->executerRequete($reqParticipant, $paramsParticipant);
                 return $insertParticipant;
             } else {
                 return $insertAdresse;

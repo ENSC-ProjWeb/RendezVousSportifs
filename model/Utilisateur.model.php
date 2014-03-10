@@ -3,7 +3,7 @@
 /**
  * Modèle Utilisateur
  */
-include $models["Modele"];
+
 
 class Utilisateur extends Modele {
 
@@ -24,7 +24,7 @@ class Utilisateur extends Modele {
             "numTel" => $infosUser["tel"],
             "desc" => $infosUser["desc"]
         );
-        $insertUser = executerRequete($requeteUser, $paramsUser);
+        $insertUser = $this->executerRequete($requeteUser, $paramsUser);
         return $insertUser;
     }
 

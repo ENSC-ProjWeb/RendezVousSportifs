@@ -5,8 +5,6 @@
  *
  * @author Guillaume CARAYON
  */
-include $models["Modele"];
-include $models["Utilisateur"];
 
 class Image extends Modele {
 
@@ -26,14 +24,14 @@ class Image extends Modele {
             "nomImage" => $nomImage,
             "cibleImage" => $locImage,
         );
-        $insertImage = executerRequete($reqImage, $paramsImage);
+        $insertImage = $this->executerRequete($reqImage, $paramsImage);
  
 
         // Lien entre l'image et l'utilisateur
         if ($insertImage) {
             $reqImageUser = "UPDATE UTILISATEUR SET idImage = (SELECT LAST_INSERT_ID() FROM IMAGE) WHERE loginUser = :login";
             $paramsImageUser = array("login" => $login);
-            $insertImageUser = executerRequete($reqImageUser, $paramsImageUser);
+            $insertImageUser = $this->executerRequete($reqImageUser, $paramsImageUser);
             return $insertImageUser;
         }
 

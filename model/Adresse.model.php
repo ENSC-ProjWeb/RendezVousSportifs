@@ -5,7 +5,6 @@
  *
  * @author Guillaume
  */
-include $models["Modele"];
 
 class Adresse extends Modele {
 
@@ -27,7 +26,7 @@ class Adresse extends Modele {
             "dptAdresse" => $infosLoc["dptAdresse"],
             "regionAdresse" => $infosLoc["regionAdresse"],
             "paysAdresse" => $infosLoc["paysAdresse"]);
-        $insertAdresse = executerRequete($reqAdresse, $params);
+        $insertAdresse = $this->executerRequete($reqAdresse, $params);
         return $insertAdresse;
     }
 

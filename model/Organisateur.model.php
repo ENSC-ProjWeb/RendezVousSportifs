@@ -6,9 +6,6 @@
  * @author Guillaume
  * @version 1.0.0
  */
-include $models["Modele"];
-include $models["Utilisateur"];
-include $models["Adresse"];
 
 class Organisateur extends Modele {
 
@@ -38,7 +35,7 @@ class Organisateur extends Modele {
                     "mailRef" => $infosOrg["mailRef"],
                     "loginUser" => $infosGlob["login"],
                     "idAdresse" => "(SELECT LAST_INSERT_ID() FROM ADRESSE)");
-                $insertOrganisateur = $bdd->executerRequete($reqOrganisateur, $paramsOrganisateur);
+                $insertOrganisateur = $this->executerRequete($reqOrganisateur, $paramsOrganisateur);
                 return $insertOrganisateur;
             } else {
                 return $insertAdresse;
