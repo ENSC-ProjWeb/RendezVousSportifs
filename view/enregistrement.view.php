@@ -1,4 +1,4 @@
-<!--
+<?php
 /**
  * Vue enregistrement
  * 
@@ -8,7 +8,7 @@
  * @todo: Améliorer ergonomie formulaire
  * @todo: Améliorer affichage pour l'adresse
  */
--->
+?>
 
 
 <script type="text/javascript">
@@ -16,7 +16,7 @@
     {
         var formOrganisateur = document.getElementById("formEnrOrganisateur");
         var formParticipant = document.getElementById("formEnrParticipant");
-        var formGlobal = document.getElementById("globForm")
+        var formGlobal = document.getElementById("globForm");
         if (document.getElementById("chParticipant").checked === true)
         {
             formGlobal.style.display = "block";
@@ -33,6 +33,8 @@
 </script>
 
 <h2> Enregistrement </h2>
+
+<?php echo $dataView["message"]; ?>
 
 <a href="index.php?action=initialiser"> Revenir &agrave; l'accueil </a> <br/><br/>
 
