@@ -18,9 +18,7 @@ class Adresse extends Modele {
      */
     public function insertAdresse($infosLoc) {
         $reqAdresse = "INSERT INTO ADRESSE VALUES(:numVoie, :nomVoie, :cptVoie, :cpAdresse, :villeAdresse, :dptAdresse, :regionAdresse, :paysAdresse";
-        $bdd = $this->getBdd();
-        $insertAdresse = $bdd->prepare($reqAdresse);
-        $insertAdresse->execute(array(
+        $params = array(
             "numVoie" => $infosLoc["numVoie"],
             "nomVoie" => $infosLoc["nomVoie"],
             "cptVoie" => $infosLoc["cptVoie"],
@@ -28,7 +26,9 @@ class Adresse extends Modele {
             "villeAdresse" => $infosLoc["villeAdresse"],
             "dptAdresse" => $infosLoc["dptAdresse"],
             "regionAdresse" => $infosLoc["regionAdresse"],
-            "paysAdresse" => $infosLoc["paysAdresse"]));
+            "paysAdresse" => $infosLoc["paysAdresse"]);
+        $insertAdresse = executerRequete($reqAdresse, $params);
+        return $insertAdresse;
     }
 
 }

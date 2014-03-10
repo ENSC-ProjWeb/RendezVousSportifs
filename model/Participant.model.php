@@ -6,13 +6,12 @@
  * @author Guillaume
  * @version 1.0.0
  */
-
 include $models["Modele"];
 include $models["Utilisateur"];
 include $models["Adresse"];
 
 class Participant extends Modele {
-    
+
     /**
      * Insertion de participant
      * 
@@ -21,25 +20,30 @@ class Participant extends Modele {
      * @param array $infosParticipant tableau contenant les infos du participant
      * @param array $infosLoc tableau contenant les infos de localisation
      */
-    
-    public function insertParticipant($infosGlob, $infosParticipant, $infosLoc)
-    {
+    public function insertParticipant($infosGlob, $infosParticipant, $infosLoc) {
         $adresse = new Adresse();
         $utilisateur = new Utilisateur();
-        
-        $utilisateur->insertUtilisateur($infosGlob);
-        $adresse->insertAdresse($infosLoc);
-        
-        $reqParticipant = "INSERT INTO PARTICIPANT VALUES (:nomParticipant, :prenomParticipant, :genreParticipant, :dateNaissanceParticipant, :loginUser, :idAdresse)";
-        $bdd = $this->getBdd();
-        $insertParticipant = $bdd->prepare($reqParticipant);
-        $insertParticipant->execute(array(
-            "nomParticipant" => $infosParticipant["nomParticipant"],
-            "prenomParticipant" => $infosParticipant["prenomParticipant"],
-            "genreParticipant" => $infosParticipant["genreParticipant"],
-            "dateNaissanceParticipant" => $infosParticipant["dateNaissanceParticipant"],
-            "loginUser" => $infosGlob["login"],
-            "idAdresse" => "(SELECT LAST_INSERT_ID() FROM ADRESSE)"
-        ));
+
+        $insertUtilisateur = $utilisateur->insertUtilisateur($infosGlob);
+        if ($insertUtilisateur) {
+            $insertAdresse = $adresse->insertAdresse($infosLoc);
+            if ($insertAdresse) {
+                $reqParticipant = "INSERT INTO PARTICIPANT VALUES (:nomParticipant, :prenomParticipant, :genreParticipant, :dateNaissanceParticipant, :loginUser, :idAdresse)";
+                $paramsParticipant = array(
+                    "nomParticipant" => $infosParticipant["nomParticipant"],
+                    "prenomParticipant" => $infosParticipant["prenomParticipant"],
+                    "genreParticipant" => $infosParticipant["genreParticipant"],
+                    "dateNaissanceParticipant" => $infosParticipant["dateNaissanceParticipant"],
+                    "loginUser" => $infosGlob["login"],
+                    "idAdresse" => "(SELECT LAST_INSERT_ID() FROM ADRESSE)");
+                $insertParticipant = executerRequete($reqParticipant, $paramsParticipant);
+                return $insertParticipant;
+            } else {
+                return $insertAdresse;
+            }
+        } else {
+            return $insertUtilisateur;
+        }
     }
+
 }
