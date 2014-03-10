@@ -9,7 +9,7 @@
  */
 include "config.php";
 foreach ($libs as $nomLib => $emplacementlib) {
-    include $emplacementLib;
+    include "$emplacementlib";
 }
 // On démarre ou on relance la session précédente
 session_start();
