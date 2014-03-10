@@ -15,7 +15,7 @@ foreach ($libs as $nomLib => $emplacementlib) {
 session_start();
 
 // On définit au préalable l'action et l'état en cours à l'action d'initialisation et à l'état initial
-if (!isset(filter_input(INPUT_REQUEST, 'action'))) {
+if (!isset($_REQUEST['action'])) {
     $_REQUEST['action'] = $initAct;
 }
 if (!isset($_SESSION['state'])) {
