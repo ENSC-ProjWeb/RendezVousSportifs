@@ -4,12 +4,13 @@
  * Fichier contrôleur
  *
  * @author: Guillaume CARAYON 
- * @version : 1.0.1
+ * @version : 1.1.0
  * 
  */
-
 include "config.php";
-
+foreach ($libs as $nomLib => $emplacementlib) {
+    include "$emplacementlib";
+}
 // On démarre ou on relance la session précédente
 session_start();
 
@@ -23,7 +24,6 @@ if (!isset($_SESSION['state'])) {
 
 $userQuery = $_REQUEST['action'];        // requête utilisateur
 $actState = $_SESSION['state'];  // état actuel
-
 // On vérifie que la requête utilisateur est autorisée pour l'état actuel
 $allowedQueries = $states[$actState]['allowedActs'];
 $isAllowed = in_array($userQuery, $allowedQueries);
@@ -33,19 +33,28 @@ if (!$isAllowed) {
     $userQuery = $falseAct;
 }
 
-// On fait appel à l'action demandée
+// On fait appel à l'action demandée en incluant le(s) modèle(s) utilisés
 if (!file_exists($acts[$userQuery])) {
-    echo utf8_decode("Veuillez vérifier que l'action demandée $userQuery est bien existante <br/>");
+    echo "Veuillez v&eacute;rifier que l'action demand&eacute;e $userQuery est bien existante <br/>";
 } else {
+    $modelsUsed = $states[$actState]["usingModels"];
+    foreach ($modelsUsed as $model) {
+        $loc = $models[$model];
+        if (!file_exists($loc)) {
+            echo "Veuillez v&eacute;rifier que le mod&egrave;le $model existe !";
+        } else {
+            include $loc;
+        }
+    }
     include $acts[$userQuery];
 }
 
 // On récupère le nouvel état de l'application et on affiche le template correspondant
-$actState = $_SESSION['state'];
-$tplToDisplay = $states[$actState]['displayTpl'];
+$newState = $_SESSION['state'];
+$tplToDisplay = $states[$newState]['displayTpl'];
 $fileTpl = $tpls[$tplToDisplay];
 if (!file_exists($fileTpl)) {
-    echo utf8_decode("Veuillez vérifier que le template demandé $tplToDisplay est bien configuré <br/>");
+    echo "Veuillez v&eacute;rifier que le template demand&eacute; $tplToDisplay est bien configur&eacute; <br/>";
 } else {
     include $fileTpl;
 }

@@ -16,11 +16,11 @@ include "listerFichiers.php";
 define('TITLE', 'ProjetSiteWebSport');
 
 // Paramètres BDD
-define('SGBD', 'monSGBD');
-define('LOGIN', 'monLogin');
-define('PASSWORD', 'monPassword');
-define('HOST', 'monHost');
-define('BASE', 'maBase');
+define('SGBD', 'mysql');
+define('LOGIN', 'admin');
+define('PASSWORD', '');
+define('HOST', 'localhost');
+define('BASE', 'BDDProjetSiteWeb');
 define('DNS', SGBD.':host='.HOST.';dbname='.BASE);
 
 
@@ -39,6 +39,7 @@ $views = listerFichiers("view/*.view.*");     // contient les fragments de templ
 $acts = listerFichiers("action/*.act.php");   // contient les fichiers d'actions
 $css = listerFichiers("css/*.css");           // contient les fichiers de style
 $libs = listerFichiers("lib/*.lib.php");      // contient les fonctions utilitaires
+$models = listerFichiers("model/*.model.php"); // contient les modèles pour l'accès aux données
 
 
 /* ------------------------------ PARAMETRES ACTIONS ------------------------------- */
@@ -57,9 +58,11 @@ $initState = 'nonConnecte_accueil';
 $states = array();
 
 $states['nonConnecte_accueil'] = array('displayTpl' => 'tplPrincipal',
-    'allowedActs' => array('initialiser'));
+    'allowedActs' => array('initialiser', 'inscrire'),
+    'usingModels' => array('Modele'));
 
-$states['nonConnecte_enregistrement'] = array('display' => 'tplPrincipal',
-        'allowedActs' => array('initialiser'));
+$states['nonConnecte_enregistrement'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'validerInscription'),
+        'usingModels' => array('Organisateur', 'Participant'));
 
 

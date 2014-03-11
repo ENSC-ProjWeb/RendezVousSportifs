@@ -6,6 +6,8 @@
      * @version: 1.0.0
      * 
      */
+
+echo $dataView['message'];
 ?>
 <table width="50%">
     <?php

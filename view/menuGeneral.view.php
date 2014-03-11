@@ -17,8 +17,8 @@
     <form method='POST' action='index.php?action=rechercherDansCalendrier'>
         <table>
             <tr> 
-                <td><label for='fromDay'>Evénement du : (jj/mm/aaaa) </label></td>
-                <td><input type='text' size='10' name='fromDay' id='fromDay'/></td>
+                <td><label for='fromDay'>Evénement du : </label></td>
+                <td><input type='text' size='10' name='fromDay' id='fromDay' placeholder="(jj/mm/aaaa)"/></td>
             </tr>
             <tr>
                 <td><label for='fromHourFromDay'> à partir de : </label></td> 
