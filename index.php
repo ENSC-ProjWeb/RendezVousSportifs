@@ -37,15 +37,6 @@ if (!$isAllowed) {
 if (!file_exists($acts[$userQuery])) {
     echo "Veuillez v&eacute;rifier que l'action demand&eacute;e $userQuery est bien existante <br/>";
 } else {
-    $modelsUsed = $states[$actState]["usingModels"];
-    foreach ($modelsUsed as $model) {
-        $loc = $models[$model];
-        if (!file_exists($loc)) {
-            echo "Veuillez v&eacute;rifier que le mod&egrave;le $model existe !";
-        } else {
-            include $loc;
-        }
-    }
     include $acts[$userQuery];
 }
 
