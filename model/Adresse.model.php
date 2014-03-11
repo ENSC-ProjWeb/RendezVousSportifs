@@ -17,7 +17,7 @@ class Adresse extends Modele {
      * @param type $infosLoc
      */
     public function insertAdresse($infosLoc) {
-        $reqAdresse = "INSERT INTO ADRESSE VALUES(:numVoie, :nomVoie, :cptVoie, :cpAdresse, :villeAdresse, :dptAdresse, :regionAdresse, :paysAdresse";
+        $reqAdresse = "INSERT INTO ADRESSE VALUES(:numVoie, :nomVoie, :cptVoie, :cpAdresse, :villeAdresse, :dptAdresse, :regionAdresse, :paysAdresse)"
         $params = array(
             "numVoie" => $infosLoc["numVoie"],
             "nomVoie" => $infosLoc["nomVoie"],

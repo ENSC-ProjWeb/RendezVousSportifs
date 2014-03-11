@@ -30,7 +30,6 @@ class Image extends Modele {
  
 
         // Lien entre l'image et l'utilisateur
-        if ($insertImage) {
             $reqImageUser = "UPDATE UTILISATEUR SET idImage = (SELECT LAST_INSERT_ID() FROM IMAGE) WHERE loginUser = :login";
             $paramsImageUser = array("login" => $login);
             $insertImageUser = executerRequete($reqImageUser, $paramsImageUser);
