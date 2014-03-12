@@ -17,13 +17,13 @@
  */
 function retournerMessageErreurVerifGlob($verifGlob) {
     switch ($verifGlob) {
-        case EMPTY_TYPE_ACCOUNT : $message = "Veuillez sélectionner un type de compte !";
+        case EMPTY_TYPE_ACCOUNT : $message = "Veuillez s&eacute;lectionner un type de compte !";
             break;
         case EMPTY_LOGIN : $message = "Veuillez saisir un login !";
             break;
         case EMPTY_PASSWORD : $message = "Veuillez saisir un mot de passe !";
             break;
-        case EMPTY_MAIL_ADDRESS : $message = "Veuillez définir une adresse mail !";
+        case EMPTY_MAIL_ADDRESS : $message = "Veuillez d&eacute;finir une adresse mail !";
             break;
         case UNMATCH_PASSWORD : $message = "Le mot de passe n'est pas correct !";
             break;
@@ -49,17 +49,17 @@ function retournerMessageErreurVerifOrg($verifOrg) {
     switch ($verifOrg) {
         case EMPTY_NOM : $message = "Veuillez saisir un nom pour votre organisation !";
             break;
-        case EMPTY_TYPE_ORG : $message = "Veuillez sélectionner un type d'organisation !";
+        case EMPTY_TYPE_ORG : $message = "Veuillez s&eacute;lectionner un type d'organisation !";
             break;
-        case EMPTY_TEL : $message = "Veuillez saisir le numéro de téléphone de votre organisation";
+        case EMPTY_TEL : $message = "Veuillez saisir le num&eacute;ro de t&eacute;l&eacute;phone de votre organisation";
             break;
-        case EMPTY_NOM_REF : $message = "Veuillez saisir le nom de votre référent !";
+        case EMPTY_NOM_REF : $message = "Veuillez saisir le nom de votre r&eacute;f&eacute;rent !";
             break;
-        case EMPTY_PRENOM_REF : $message = "Veuillez saisir le prénom de votre référent !";
+        case EMPTY_PRENOM_REF : $message = "Veuillez saisir le pr&eacute;nom de votre r&eacute;f&eacute;rent !";
             break;
-        case EMPTY_MAIL_REF : $message = "Veuillez saisir l'adresse e-mail du référent !";
+        case EMPTY_MAIL_REF : $message = "Veuillez saisir l'adresse e-mail du r&eacute;f&eacute;rent !";
             break;
-        case EMPTY_TEL_REF : $message = "Veuillez saisir le téléphone du référent !";
+        case EMPTY_TEL_REF : $message = "Veuillez saisir le t&eacute;l&eacute;phone du r&eacute;f&eacute;rent !";
             break;
         default: $message = "Formulaire non valide";
             break;
