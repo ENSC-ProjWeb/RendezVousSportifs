@@ -17,13 +17,11 @@ class Utilisateur extends Modele {
      * @return un objet PDO Statement
      */
     public function insertUtilisateur($infosUser) {
-        $requeteUser = "INSERT INTO UTILISATEUR(loginUser, mdpUser, mailUser, telUser, descUser) VALUES (:login, :password, :mail, :tel, :desc)";
+        $requeteUser = "INSERT INTO UTILISATEUR(loginUser, mdpUser, mailUser) VALUES (:login, :password, :mail)";
         $paramsUser = array(
             "login" => $infosUser["login"],
             "password" => $infosUser["password"],
             "mail" => $infosUser["adresseMail"],
-            "tel" => $infosUser["numTel"],
-            "desc" => $infosUser["desc"]
         );
         $insertUser = $this->executerRequete($requeteUser, $paramsUser);
         return $insertUser;

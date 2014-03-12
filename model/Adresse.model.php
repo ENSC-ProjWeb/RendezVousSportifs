@@ -14,7 +14,7 @@ class Adresse extends Modele {
      * Permet d'insérer les informations concernant l'adresse
      * Préféré une implémentation dans les méthodes d'insertions de type de compte particulier
      * @param array $infosLoc tableau contenant les informations de localisation
-     * @return un objet PDO Statement
+     * @return l'ID de l'objet inséré
      * 
      */
     public function insertAdresse($infosLoc) {
@@ -28,8 +28,8 @@ class Adresse extends Modele {
             "dptAdresse" => $infosLoc["dptAdresse"],
             "regionAdresse" => $infosLoc["regionAdresse"],
             "paysAdresse" => $infosLoc["paysAdresse"]);
-        $insertAdresse = $this->executerRequete($reqAdresse, $params);
-        return $insertAdresse;
+        $this->executerRequete($reqAdresse, $params);
+        return $this->getLastId("idAdresse", "ADRESSE");
 
     }
 }

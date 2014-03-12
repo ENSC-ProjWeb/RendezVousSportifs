@@ -17,10 +17,10 @@ define('TITLE', 'ProjetSiteWebSport');
 
 // Paramètres BDD
 define('SGBD', 'mysql');
-define('LOGIN', 'admin');
+define('LOGIN', 'root');
 define('PASSWORD', '');
-define('HOST', 'localhost');
-define('BASE', 'BDDProjetSiteWeb');
+define('HOST', '127.0.0.1');
+define('BASE', 'bdprojetweb');
 define('DNS', SGBD.':host='.HOST.';dbname='.BASE);
 
 
@@ -58,11 +58,9 @@ $initState = 'nonConnecte_accueil';
 $states = array();
 
 $states['nonConnecte_accueil'] = array('displayTpl' => 'tplPrincipal',
-    'allowedActs' => array('initialiser', 'inscrire'),
-    'usingModels' => array('Modele'));
+    'allowedActs' => array('initialiser', 'inscrire'));
 
 $states['nonConnecte_enregistrement'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'validerInscription'),
-        'usingModels' => array('Organisateur', 'Participant'));
+        'allowedActs' => array('initialiser', 'validerInscription', 'inscrire'));
 
 

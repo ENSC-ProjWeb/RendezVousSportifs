@@ -16,8 +16,7 @@ class Organisateur extends Modele {
      * @param string $login login de l'utilisateur 
      * @param array $infosOrg tableau contenant les infos de l'organisateur
      * @param array $infosLoc tableau contenant les infos de localisation
-     * 
-     * @return un objet PDO Statement
+     *
      */
     public function insertOrganisateur($infosGlob, $infosOrg, $infosLoc) {
         
@@ -27,7 +26,7 @@ class Organisateur extends Modele {
 
         // Insertion des infos progressivement
         $utilisateur->insertUtilisateur($infosGlob);
-        $insertAdresse = $adresse->insertAdresse($infosLoc);
+        $idAdresse = $adresse->insertAdresse($infosLoc);
         $reqOrganisateur = "INSERT INTO ORGANISATEUR VALUES ('',:nomOrg, :typeOrg, :nomRef, :prenomRef, :telRef, :mailRef, :loginUser, :idAdresse)";
         $paramsOrganisateur = array(
                     "nomOrg" => $infosOrg["nomOrganisation"],
@@ -37,8 +36,10 @@ class Organisateur extends Modele {
                     "telRef" => $infosOrg["numTelRef"],
                     "mailRef" => $infosOrg["mailRef"],
                     "loginUser" => $infosGlob["login"],
-                    "idAdresse" => $insertAdresse["idAdresse"]);
-        $insertOrganisateur = $this->executerRequete($reqOrganisateur, $paramsOrganisateur);
-        return $insertOrganisateur;
+                    "idAdresse" => $idAdresse);
+        $this->executerRequete($reqOrganisateur, $paramsOrganisateur);
+        $updUser = "UPDATE UTILISATEUR SET telUser = :telUser, descUser = :descUser WHERE loginUser = :loginUser";
+        return $this->executerRequete($updUser, array("telUser" => $infosOrg["numTelOrg"], "descUser" => $infosOrg["descOrg"], "loginUser" => $infosGlob["login"]));
+       
     }
 }
