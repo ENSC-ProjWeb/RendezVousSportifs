@@ -31,10 +31,9 @@ function verifierFormulaireGlobal($infosGlobales) {
     define("EMPTY_LOGIN", -1);
     define("EMPTY_PASSWORD", -2);
     define("EMPTY_MAIL_ADDRESS", -3);
-    define("EMPTY_TEL", -4);
-    define("EMPTY_TYPE_ACCOUNT", -5);
-    define("UNMATCH_PASSWORD", -6);
-    define("UNMATCH_MAIL", -7);
+    define("EMPTY_TYPE_ACCOUNT", -4);
+    define("UNMATCH_PASSWORD", -5);
+    define("UNMATCH_MAIL", -6);
 
     $typeCompte = $infosGlobales["typeCompte"];
     $login = $infosGlobales["login"];
@@ -42,7 +41,6 @@ function verifierFormulaireGlobal($infosGlobales) {
     $confirmPassword = $infosGlobales["confirmPassword"];
     $adresseMail = $infosGlobales["adresseMail"];
     $confirmMail = $infosGlobales["confirmMail"];
-    $numTel = $infosGlobales["numTel"];
 
     if (empty($typeCompte)) {
         return EMPTY_TYPE_ACCOUNT;
@@ -56,8 +54,6 @@ function verifierFormulaireGlobal($infosGlobales) {
         return UNMATCH_PASSWORD;
     } elseif ($adresseMail !== $confirmMail) {
         return UNMATCH_MAIL;
-    } elseif ($typeCompte === "organisateur" && empty($numTel)) {
-        return EMPTY_TEL;
     } else {
         return VALIDE;
     }
@@ -87,6 +83,7 @@ function verifierFormulaireOrganisateur($infosOrg) {
     define("EMPTY_PRENOM_REF", -4);
     define("EMPTY_MAIL_REF", -5);
     define("EMPTY_TEL_REF", -6);
+    define("EMPTY_TEL", -7);
 
     $nomOrganisation = $infosOrg["nomOrganisation"];
     $typeOrganisation = $infosOrg["typeOrganisation"];
@@ -94,11 +91,14 @@ function verifierFormulaireOrganisateur($infosOrg) {
     $prenomRef = $infosOrg["prenomRef"];
     $numTelRef = $infosOrg["numTelRef"];
     $mailRef = $infosOrg["mailRef"];
+    $numTelOrg = $infosOrg["numTelOrg"];
 
     if (empty($nomOrganisation)) {
         return EMPTY_NOM;
     } elseif (empty($typeOrganisation)) {
         return EMPTY_TYPE_ORG;
+    } elseif (empty($numTelOrg)) {
+        return EMPTY_TEL;
     } elseif (empty($nomRef)) {
         return EMPTY_NOM_REF;
     } elseif (empty($prenomRef)) {
