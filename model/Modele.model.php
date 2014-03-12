@@ -24,6 +24,14 @@ abstract class Modele {
     return $resultat;
   }
 
+  // Retourne le dernier ID inséré dans la table
+  protected function getLastId($nomId, $table) {
+      $req = "SELECT MAX(:nomId) AS LASTID FROM :table";
+      $resultat = $this->executerRequete($req, array("nomId" => $nomId, "table" => $table));
+      $infos = $resultat->fetch();
+      return $infos["LASTID"];
+      
+  }
   // Renvoie un objet de connexion à la BD en initialisant la connexion au besoin
   private function getBdd() {
     if ($this->bdd == null) {
