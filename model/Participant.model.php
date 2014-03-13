@@ -6,9 +6,6 @@
  * @author Guillaume
  * @version 1.0.0
  */
-include $models["Modele"];
-include $models["Utilisateur"];
-include $models["Adresse"];
 
 class Participant extends Modele {
 
@@ -21,29 +18,23 @@ class Participant extends Modele {
      * @param array $infosLoc tableau contenant les infos de localisation
      */
     public function insertParticipant($infosGlob, $infosParticipant, $infosLoc) {
+        
+        // Instanciation des modèles nécessaires
         $adresse = new Adresse();
         $utilisateur = new Utilisateur();
 
-        $insertUtilisateur = $utilisateur->insertUtilisateur($infosGlob);
-        if ($insertUtilisateur) {
-            $insertAdresse = $adresse->insertAdresse($infosLoc);
-            if ($insertAdresse) {
-                $reqParticipant = "INSERT INTO PARTICIPANT VALUES (:nomParticipant, :prenomParticipant, :genreParticipant, :dateNaissanceParticipant, :loginUser, :idAdresse)";
-                $paramsParticipant = array(
-                    "nomParticipant" => $infosParticipant["nomParticipant"],
-                    "prenomParticipant" => $infosParticipant["prenomParticipant"],
-                    "genreParticipant" => $infosParticipant["genreParticipant"],
-                    "dateNaissanceParticipant" => $infosParticipant["dateNaissanceParticipant"],
-                    "loginUser" => $infosGlob["login"],
-                    "idAdresse" => "(SELECT LAST_INSERT_ID() FROM ADRESSE)");
-                $insertParticipant = executerRequete($reqParticipant, $paramsParticipant);
-                return $insertParticipant;
-            } else {
-                return $insertAdresse;
-            }
-        } else {
-            return $insertUtilisateur;
-        }
+        // Insertion des données progressives
+        $utilisateur->insertUtilisateur($infosGlob);
+        $insertAdresse = $adresse->insertAdresse($infosLoc);
+        $reqParticipant = "INSERT INTO PARTICIPANT VALUES ('',:nomParticipant, :prenomParticipant, :genreParticipant, :dateNaissanceParticipant, :loginUser, :idAdresse)";
+        $paramsParticipant = array(
+            "nomParticipant" => $infosParticipant["nomParticipant"],
+            "prenomParticipant" => $infosParticipant["prenomParticipant"],
+            "genreParticipant" => $infosParticipant["genreParticipant"],
+            "dateNaissanceParticipant" => $infosParticipant["dateNaissanceParticipant"],
+            "loginUser" => $infosGlob["login"],
+            "idAdresse" => $insertAdresse['idAdresse']);
+        $insertParticipant = $this->executerRequete($reqParticipant, $paramsParticipant);
+        return $insertParticipant;
     }
-
-}
+ } 

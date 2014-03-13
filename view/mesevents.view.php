@@ -3,13 +3,17 @@
     <head><title> Mes evenements </title></head>
     <table>
         <tr>
+            <th colspan="3"> Mes evenments passés </th>
+        </tr>
+        <tr>
             <td>une image</td>
             <td>une image</td>
             <td>une image</td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+            <td>une image</td>
+            <td>une image</td>
+            <td>une image</td>
         </tr>
     </table>
     

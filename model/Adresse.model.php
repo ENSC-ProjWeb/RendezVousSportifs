@@ -5,8 +5,6 @@
  *
  * @author Guillaume
  */
-include $models["Modele"];
-
 class Adresse extends Modele {
 
     /**
@@ -14,10 +12,13 @@ class Adresse extends Modele {
      * 
      * Permet d'insérer les informations concernant l'adresse
      * Préféré une implémentation dans les méthodes d'insertions de type de compte particulier
-     * @param type $infosLoc
+     * @param array $infosLoc tableau contenant les informations de localisation
+     * @return un objet PDO Statement
+     * 
      */
     public function insertAdresse($infosLoc) {
-        $reqAdresse = "INSERT INTO ADRESSE VALUES(:numVoie, :nomVoie, :cptVoie, :cpAdresse, :villeAdresse, :dptAdresse, :regionAdresse, :paysAdresse)"
+
+        $reqAdresse = "INSERT INTO ADRESSE VALUES('',:numVoie, :nomVoie, :cptVoie, :cpAdresse, :villeAdresse, :dptAdresse, :regionAdresse, :paysAdresse)";
         $params = array(
             "numVoie" => $infosLoc["numVoie"],
             "nomVoie" => $infosLoc["nomVoie"],
@@ -27,7 +28,7 @@ class Adresse extends Modele {
             "dptAdresse" => $infosLoc["dptAdresse"],
             "regionAdresse" => $infosLoc["regionAdresse"],
             "paysAdresse" => $infosLoc["paysAdresse"]);
-        $insertAdresse = executerRequete($reqAdresse, $params);
+        $insertAdresse = $this->executerRequete($reqAdresse, $params);
         return $insertAdresse;
     }
 

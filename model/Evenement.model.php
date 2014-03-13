@@ -27,3 +27,4 @@ class Evenement extends Modele
         //Premièrement, les participants !
         $reqEvenementParticipant = "UPDATE UTILISATEUR SET idEvent = (SELECT LAST_INSERT_ID() FROM EVENEMENT) WHERE loginUser = :login";
     }
+}

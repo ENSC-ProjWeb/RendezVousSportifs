@@ -3,7 +3,7 @@
 /**
  * Modèle Utilisateur
  */
-include $models["Modele"];
+
 
 class Utilisateur extends Modele {
 
@@ -14,6 +14,7 @@ class Utilisateur extends Modele {
      * Préférer une implémentation dans les méthodes d'insertion particulière d'organisateur
      * 
      * @param array $infosUser tableau contenant les informations de l'utilisateur 
+     * @return un objet PDO Statement
      */
     public function insertUtilisateur($infosUser) {
         $requeteUser = "INSERT INTO UTILISATEUR(loginUser, mdpUser, mailUser, telUser, descUser) VALUES (:login, :password, :mail, :tel, :desc)";
@@ -21,10 +22,10 @@ class Utilisateur extends Modele {
             "login" => $infosUser["login"],
             "password" => $infosUser["password"],
             "mail" => $infosUser["adresseMail"],
-            "numTel" => $infosUser["tel"],
+            "tel" => $infosUser["numTel"],
             "desc" => $infosUser["desc"]
         );
-        $insertUser = executerRequete($requeteUser, $paramsUser);
+        $insertUser = $this->executerRequete($requeteUser, $paramsUser);
         return $insertUser;
     }
 
