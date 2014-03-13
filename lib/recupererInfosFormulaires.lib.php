@@ -6,7 +6,10 @@
  * Fonctions qui permettent de récupérer les informations du formulaire
  * 
  * @author: Guillaume CARAYON
- * @version: 1.0.0
+ * @version: 1.1.0
+ * 
+ * 1.1.0 : Modification au niveau de la répartition des infos (photos, desc, tel)
+ *         + Accès avec filter_input 
  * 
  */
 
@@ -24,10 +27,7 @@ function recupererInfosGlobales() {
         "password" => filter_input(INPUT_POST, 'password'),
         "confirmPassword" => filter_input(INPUT_POST, 'confirmPassword'),
         "adresseMail" => filter_input(INPUT_POST, 'adresseMail'),
-        "confirmMail" => filter_input(INPUT_POST, 'confirmMail'),
-        "numTel" => filter_input(INPUT_POST, 'numTel'),
-        "desc" => filter_input(INPUT_POST, 'desc'),
-        "uploadAvatar" => $_FILES["uploadAvatar"]
+        "confirmMail" => filter_input(INPUT_POST, 'confirmMail')
     );
 }
 
@@ -40,10 +40,13 @@ function recupererInfosGlobales() {
  */
 function recupererInfosParticipant() {
     return array(
-        "nomParticipant" => $_POST["nomParticipant"],
-        "prenomParticipant" => $_POST["prenomParticipant"],
-        "genre" => $_POST["genre"],
-        "dateNaissance" => $_POST["dateNaissance"]
+        "nomParticipant" => filter_input(INPUT_POST, "nomParticipant"),
+        "prenomParticipant" => filter_input(INPUT_POST, "prenomParticipant"),
+        "genreParticipant" => filter_input(INPUT_POST, "genreParticipant"),
+        "dateNaissanceParticipant" => filter_input(INPUT_POST, "dateNaissanceParticipant"),
+        "numTelPart" => filter_input(INPUT_POST, "numTelPart"),
+        "uploadAvatarPart" => $_FILES["uploadAvatarPart"],
+        "descPart" => filter_input(INPUT_POST, "descPart")
     );
 }
 
@@ -56,12 +59,15 @@ function recupererInfosParticipant() {
  */
 function recupererInfosOrganisateur() {
     return array(
-        "nomOrganisation" => $_POST["nomOrganisation"],
-        "typeOrganisation" => $_POST["typeOrganisation"],
-        "nomRef" => $_POST["nomRef"],
-        "prenomRef" => $_POST["prenomRef"],
-        "mailRef" => $_POST["mailRef"],
-        "numTelRef" => $_POST["numTelRef"],
+        "nomOrganisation" => filter_input(INPUT_POST, "nomOrganisation"),
+        "typeOrganisation" => filter_input(INPUT_POST, "typeOrganisation"),
+        "nomRef" => filter_input(INPUT_POST, "nomRef"),
+        "prenomRef" => filter_input(INPUT_POST, "prenomRef"),
+        "mailRef" => filter_input(INPUT_POST, "mailRef"),
+        "numTelRef" => filter_input(INPUT_POST, "numTelRef"),
+        "numTelOrg" => filter_input(INPUT_POST, "numTelOrg"),
+        "descOrg" => filter_input(INPUT_POST, "descOrg"),
+        "uploadAvatarOrg" => $_FILES["uploadAvatarOrg"]
     );
 }
 
@@ -74,13 +80,13 @@ function recupererInfosOrganisateur() {
  */
 function recupererInfosLocalisation() {
     return array(
-        "numVoie" => $_POST["numVoie"],
-        "nomVoie" => $_POST["nomVoie"],
-        "cptVoie" => $_POST["cptVoie"],
-        "cpAdresse" => $_POST["cpAdresse"],
-        "villeAdresse" => $_POST["villeAdresse"],
-        "dptAdresse" => $_POST["dptAdresse"],
-        "regionAdresse" => $_POST["regionAdresse"],
-        "paysAdresse" => $_POST["paysAdresse"]
+        "numVoie" => filter_input(INPUT_POST,"numVoie"),
+        "nomVoie" => filter_input(INPUT_POST,"nomVoie"),
+        "cptVoie" => filter_input(INPUT_POST,"cptVoie"),
+        "cpAdresse" => filter_input(INPUT_POST, "cpAdresse"),
+        "villeAdresse" => filter_input(INPUT_POST, "villeAdresse"),
+        "dptAdresse" => filter_input(INPUT_POST, "dptAdresse"),
+        "regionAdresse" => filter_input(INPUT_POST,"regionAdresse"),
+        "paysAdresse" => filter_input(INPUT_POST, "paysAdresse")
     );
 }

@@ -21,6 +21,7 @@ class Evenement extends Modele
             "debutEvent" => $paramsEvenement['debutEvent'],
             "finEvent" => $paramsEvenement['finEvent'],
             );
+        
         $insertEvenement = executerRequete($evenement, $paramsEvenement);
         
         //Il faut faire un lien entre l'organisateur(ou l'utilisateur) et les evenement qu'il a créé (auquels il participe)

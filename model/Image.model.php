@@ -25,13 +25,12 @@ class Image extends Modele {
             "nomImage" => $nomImage,
             "cibleImage" => $locImage,
         );
-        $insertImage = $this->executerRequete($reqImage, $paramsImage);
+        $this->executerRequete($reqImage, $paramsImage);
         // Lien entre l'image et l'utilisateur
-
+        $lastId = $this->getLastId("idImage", "IMAGE");    
         $reqImageUser = "UPDATE UTILISATEUR SET idImage = :idAdd WHERE loginUser = :login";
-        $paramsImageUser = array("login" => $login, "idAdd" => $insertImage["idImage"]);
+        $paramsImageUser = array("login" => $login, "idAdd" => $lastId);
         $insertImageUser = $this->executerRequete($reqImageUser, $paramsImageUser);
         return $insertImageUser;
     }
-
 }
