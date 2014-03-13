@@ -81,4 +81,11 @@ class Participant extends Modele {
         $res = $infos->fetch();
         return $res["COUNT(idEvent)"];
     }
+    public function getEvenementParticipant($login)
+    {
+        $getEvenementParticipant = "SELECT idUser FROM PARTICIPANT WHERE loginUser = $login";
+        
+    }
+    
+    
  } 

@@ -32,5 +32,6 @@ class Image extends Modele {
         $paramsImageUser = array("login" => $login, "idAdd" => $lastId);
         $insertImageUser = $this->executerRequete($reqImageUser, $paramsImageUser);
         return $insertImageUser;
-    }
+     }
+    $reqImagePourEvent = "SELECT idImage FROM CONTENIR WHERE idEvent =  ";
 }

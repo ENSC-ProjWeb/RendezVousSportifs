@@ -23,9 +23,19 @@ class Evenement extends Modele
             );
         
         $insertEvenement = executerRequete($evenement, $paramsEvenement);
-        
-        //Il faut faire un lien entre l'organisateur(ou l'utilisateur) et les evenement qu'il a créé (auquels il participe)
-        //Premièrement, les participants !
-        $reqEvenementParticipant = "UPDATE UTILISATEUR SET idEvent = (SELECT LAST_INSERT_ID() FROM EVENEMENT) WHERE loginUser = :login";
+       
+        //Il faut faire un lien entre l'organisateur(ou les  participants) et les evenement qu'il a créé (auquels il participe)
+        //Premièrement, les participants
+    }
+    
+    public function infoEvenement($idEvent)
+    {
+        $infoEvent = "SELECT * FROM EVENEMENTS WHERE IdEvent = $idEvent";
+        return $infoEvent;
+    }
+   
+    public function imageEvent($infoEvent)
+    {
+        $infoEvent = "SELECT "
     }
 }
