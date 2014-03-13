@@ -23,7 +23,7 @@ class Participant extends Modele {
         // Instanciation des modèles nécessaires
         $adresse = new Adresse();
         $utilisateur = new Utilisateur();
-
+        
         // Insertion des données progressives
         $utilisateur->insertUtilisateur($infosGlob);
         $idAdresse = $adresse->insertAdresse($infosLoc);

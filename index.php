@@ -2,6 +2,8 @@
 
 /**
  * Fichier contrôleur
+ * 
+ * Inspiré du framework de M. Patrick Etcheverry - Enseignant à l'IUT de Bayonne et du Pays Basque
  *
  * @author: Guillaume CARAYON 
  * @version : 1.1.0
