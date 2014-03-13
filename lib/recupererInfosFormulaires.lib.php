@@ -90,3 +90,17 @@ function recupererInfosLocalisation() {
         "paysAdresse" => filter_input(INPUT_POST, "paysAdresse")
     );
 }
+
+/**
+ * RecupererInfosConnexion
+ * 
+ * Permet de récupérer les informations pour la connexion à un compte
+ * 
+ * @return un tableau indicé avec les noms des champs des formulaires
+ */
+function recupererInfosConnexion() {
+    return array(
+        "login" => filter_input(INPUT_POST, "login"),
+        "password" => filter_input(INPUT_POST, "password")
+    );
+}

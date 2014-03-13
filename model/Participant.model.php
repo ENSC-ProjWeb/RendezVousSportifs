@@ -6,7 +6,6 @@
  * @author Guillaume
  * @version 1.0.0
  */
-
 class Participant extends Modele {
 
     /**
@@ -20,11 +19,11 @@ class Participant extends Modele {
      * @return l'id du participant inséré
      */
     public function insertParticipant($infosGlob, $infosParticipant, $infosLoc) {
-        
+
         // Instanciation des modèles nécessaires
         $adresse = new Adresse();
         $utilisateur = new Utilisateur();
-        
+
         // Insertion des données progressives
         $utilisateur->insertUtilisateur($infosGlob);
         $idAdresse = $adresse->insertAdresse($infosLoc);
@@ -40,4 +39,47 @@ class Participant extends Modele {
         $updUser = "UPDATE UTILISATEUR SET telUser = :telUser, descUser = :descUser WHERE loginUser = :loginUser";
         return $this->executerRequete($updUser, array("telUser" => $infosParticipant["numTelPart"], "descUser" => $infosParticipant["descPart"], "loginUser" => $infosGlob["login"]));
     }
- } 
+
+    /**
+     * Get Participant
+     * 
+     * Permet de récupérer les infos d'un participant à partir d'un login
+     * 
+     * @param string $login login saisi par l'utilisateur
+     * @return array avec les informations sur le participant
+     */
+    public function getParticipant($login) {
+        $req = "SELECT * FROM PARTICIPANT WHERE loginUser = :login";
+        $infos = $this->executerRequete($req, array("login" => $login));
+        return $infos->fetch();
+    }
+
+    /**
+     *  Get Nb Evenement A Venir
+     * 
+     * Permet de récupérer le nombre à venir d'événements pour un participant
+     * @param string $login login de l'utilisateur
+     * @return int nombre d'événements à venir
+     */
+    public function getNbEvenementAVenir($login) {
+        $req = "SELECT COUNT(idEvent) FROM INSCRIRE, PARTICIPANT WHERE PARTICIPANT.loginUser = :login AND INSCRIRE.idParticipant = PARTICIPANT.idParticipant AND INSCRIRE.idEvent = (SELECT idEvent FROM EVENEMENT WHERE debutEvent >= CURDATE()) AND INSCRIRE.statutInscription = 'I'";
+        $infos = $this->executerRequete($req, array("login" => $login));
+        $res = $infos->fetch();
+        return $res["COUNT(idEvent)"];
+    }
+
+    /**
+     * Get Nb Evenement en Attente
+     * 
+     * Permet de récupérer le nombre d'événement en attente pour un participant
+     * @param string $login login de l'utilisateur
+     * @return int nombre d'événements en attente
+     */
+    public function getNbEvenementEnAttente($login) {
+        $req = "SELECT COUNT(idEvent) FROM INSCRIRE, PARTICIPANT WHERE PARTICIPANT.loginUser = :login AND INSCRIRE.idParticipant = PARTICIPANT.idParticipant AND INSCRIRE.idEvent = (SELECT idEvent FROM EVENEMENT WHERE debutEvent >= CURDATE()) AND INSCRIRE.statutInscription = 'PI'";
+        $infos = $this->executerRequete($req, array("login" => $login));
+        $res = $infos->fetch();
+        return $res["COUNT(idEvent)"];
+    }
+
+}
