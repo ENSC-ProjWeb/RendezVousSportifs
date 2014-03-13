@@ -26,5 +26,17 @@ class Utilisateur extends Modele {
         $insertUser = $this->executerRequete($requeteUser, $paramsUser);
         return $insertUser;
     }
+    
+    /**
+     * Get Utilisateur
+     * 
+     * Permet de récupérer les informations d'un utilisateur à partir d'un login
+     * @param string $login login saisi par l'utilisateur
+     */
+    public function getUtilisateur($login) {
+        $requete = "SELECT * FROM UTILISATEUR WHERE loginUser = :login";
+        $getUser = $this->executerRequete($requete, array("login" => $login));
+        return $getUser->fetch();
+    }
 
 }
