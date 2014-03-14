@@ -12,14 +12,14 @@
         <h3> Bienvenue <?php echo $dataView['nomOrganisation']; ?> </h3>
         <table>
             <tr>
-                <td colspan="2"><?php echo $dataView['nbEventPending']; ?> &eacute;v&eacute;nement(s) en cours</td>
+                <td><a href='index.php?consulterEvenementsEnCours'><?php echo $dataView['nbEventPending']; ?> &eacute;v&eacute;nement(s) en cours</a></td>
             </tr>
             <tr>
-                <td colspan="2"><?php echo $dataView['nbSubscribing']; ?> inscriptions en traitement</td>
+                <td><a href="index.php?consulterEvenementsATraiter"><?php echo $dataView['nbSubscribing']; ?> inscriptions en traitement</td>
             </tr>
             <tr>
-                <td><a href="index.php?action=consulterEvenementsCompte">Mes &eacute;v&eacute;nements</a>
-                <td><a href="index.php?action=consulterCompte"/>Mon compte</td>
+                <td><a href="index.php?action=creerEvenements">Cr&eacute;er un &eacute;v&eaucte;nement</a> |
+                <a href="index.php?action=consulterCompte"/>Mon compte</td>
             </tr>
         </table>
 </div>
