@@ -64,9 +64,12 @@ $states['nonConnecte_enregistrement'] = array('displayTpl' => 'tplPrincipal',
         'allowedActs' => array('initialiser', 'validerInscription', 'inscrire', 'seConnecter'));
 
 $states['connecteOrganisateur_accueil'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser'));
+        'allowedActs' => array('initialiser', 'creerEvenement'));
 
 $states['connecteParticipant_accueil'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser'));
+
+$states['connecteOrganisateur_creationEvenement'] = array('displayTpl' => 'tplPrincipal',
         'allowedActs' => array('initialiser'));
 
 
