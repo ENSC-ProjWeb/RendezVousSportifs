@@ -9,7 +9,7 @@
 
 <!-- Zone pour la connexion -->
 <div id='zoneConnexion'>
-        <h3> Bienvenue <?php echo $dataView['nomOrganisation']; ?> </h3>
+        <h3> Bienvenue <?php echo $dataView['nomOrganisateur']; ?> </h3>
         <table>
             <tr>
                 <td><a href='index.php?consulterEvenementsEnCours'><?php echo $dataView['nbEventPending']; ?> &eacute;v&eacute;nement(s) en cours</a></td>
@@ -18,7 +18,7 @@
                 <td><a href="index.php?consulterEvenementsATraiter"><?php echo $dataView['nbSubscribing']; ?> inscriptions en traitement</td>
             </tr>
             <tr>
-                <td><a href="index.php?action=creerEvenements">Cr&eacute;er un &eacute;v&eaucte;nement</a> |
+                <td><a href="index.php?action=creerEvenement">Nouvel &eacute;v&eacute;nement</a> |
                 <a href="index.php?action=consulterCompte"/>Mon compte</td>
             </tr>
         </table>
