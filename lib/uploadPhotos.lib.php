@@ -18,6 +18,13 @@
  * 
  */
 function uploadPhotos($file, $rep) {
+    
+    define("FAIL_UPLOAD", -1);
+    define("UNMATCH_MIME_TYPE", -2);
+    define("BAD_TYPE", -3);
+    define("HEAVY_FILE", -4);
+    define("ERROR_FILE", -5);
+    define("EMPTY_FILE", -6);
 
     // On définit la liste des extensions autorisées
     $extAutorisees = array("jpg" => "image/jpeg",
