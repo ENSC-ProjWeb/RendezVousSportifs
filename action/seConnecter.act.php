@@ -45,12 +45,12 @@ if ($identifiant)
         $isOrganisateur = $organisateur->getOrganisateur($infosConnexion["login"]);
 
         // On récupère les informations nécessaires à l'affichage de la vue
-        $infosVuesOrganisateur = array("nomOrganisateur" => $isOrganisateur["nomOrganisateur"], 
+        $_SESSION["infosOrganisateur"] = array("nomOrganisateur" => $isOrganisateur["nomOrganisateur"], 
             "nbEventPending" => $organisateur->getNbEvenementEnCours($infosConnexion['login']), 
             "nbSubscribing" => $organisateur->getNbInscriptionEnCours($infosConnexion['login']));
     } else {
         // On récupère les informations nécessaires à l'affichage de la vue'
-        $infosVuesParticipant = array("nomParticipant" => $isParticipant["nomParticipant"],
+        $_SESSION["infosParticipant"] = array("nomParticipant" => $isParticipant["nomParticipant"],
             "prenomParticipant" => $isParticipant["prenomParticipant"],
             "nbEventToCome" => $participant->getNbEvenementAVenir($infosConnexion["login"]),
             "nbEventWaiting" => $participant->getNbEvenementEnAttente($infosConnexion['login']));
@@ -70,6 +70,7 @@ if ($identifiant) {
     } else {
         $_SESSION['state'] = 'connecteOrganisateur_accueil';
     }
+    $_SESSION['login'] = $infosConnexion["login"];
 } else {
     $_SESSION['state'] = 'nonConnecte_accueil';
 }
@@ -85,17 +86,17 @@ $dataView['css'] = $css['stylePrincipal'];
 $dataView['zoneCentrale'] = $views['accueil'];
 
 if ($_SESSION['state'] === "connecteParticipant_accueil") {
-    $dataView['nomParticipant'] = $infosVuesParticipant['nomParticipant'];
-    $dataView['prenomParticipant'] = $infosVuesParticipant['prenomParticipant'];
-    $dataView['nbEventToCome'] = $infosVuesParticipant["nbEventToCome"];
-    $dataView['nbEventWaiting'] = $infosVuesParticipant["nbEventWaiting"];
+    $dataView['nomParticipant'] = $_SESSION["infosParticipant"]['nomParticipant'];
+    $dataView['prenomParticipant'] = $_SESSION["infosParticipant"]['prenomParticipant'];
+    $dataView['nbEventToCome'] = $_SESSION["infosParticipant"]["nbEventToCome"];
+    $dataView['nbEventWaiting'] = $_SESSION["infosParticipant"]["nbEventWaiting"];
     $dataView['title'] = TITLE." - Bienvenue";
     $dataView['zoneMenu'] = $views["menuConnecteParticipant"];
 } elseif ($_SESSION["state"] === "connecteOrganisateur_accueil") {
     $dataView['title'] = TITLE . " - Bienvenue !";
-    $dataView['nomOrganisateur'] = $infosVuesOrganisateur["nomOrganisateur"];
-    $dataView['nbEventPending'] = $infosVuesOrganisateur['nbEventPending'];
-    $dataView['nbSubscribing'] = $infosVuesOrganisateur["nbSubscribing"];
+    $dataView['nomOrganisateur'] = $_SESSION["infosOrganisateur"]["nomOrganisateur"];
+    $dataView['nbEventPending'] = $_SESSION["infosOrganisateur"]['nbEventPending'];
+    $dataView['nbSubscribing'] = $_SESSION["infosOrganisateur"]["nbSubscribing"];
     $dataView['zoneMenu'] = $views['menuConnecteOrganisateur'];
 } else {
     $dataView['title'] = TITLE." - Acc&egrave;s refus&eacute;";
