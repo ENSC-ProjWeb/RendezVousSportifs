@@ -14,13 +14,15 @@
 // Recuperer les donnees d'entree nécessaires à l'action
 // -------------------------------------------------------
 
-// aucune donnée necessaire
+include $models["Modele"];
+include $models["Sport"];
 
 // -------------------------------------------------------
 // Executer l'action
 // ---------------------------------------------------------
 
-// pas d'action spécifique
+$sport = new Sport();
+$listeSports = $sport->getListSports();
 
 // -------------------------------------------------------
 // Definir le nouvel etat de l'application
@@ -38,7 +40,9 @@ $dataView['zoneHaute']=$views['banniere'];
 $dataView['zoneRecherche']=$views['recherche'];
 $dataView['zoneMenu']=$views['menuConnecteOrganisateur'];
 $dataView['zoneCentrale']=$views['creationEvenement'];
+$dataView['infosOrganisateur'] = $_SESSION["infosOrganisateur"];
 $dataView['css']=$css['stylePrincipal'];
+$dataView['listeSports'] = $listeSports;
 
 // Enregistrement des donnees de la vue dans la session
 $_SESSION['dataView']=$dataView;
