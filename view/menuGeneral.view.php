@@ -18,7 +18,7 @@
         <table>
             <tr> 
                 <td><label for='fromDay'>Evénement du : </label></td>
-                <td><input type='text' size='10' name='fromDay' id='fromDay' placeholder="(jj/mm/aaaa)"/></td>
+                <td><input type='text' size='12' name='fromDay' id='fromDay' placeholder="(jj/mm/aaaa)"/></td>
             </tr>
             <tr>
                 <td><label for='fromHourFromDay'> à partir de : </label></td> 
@@ -26,7 +26,7 @@
                     <label for='fromMinuteFromDay'> h </label> <input type='text' size='2' name='fromMinuteFromDay' id='fromMinuteFromDay' /></td>
             </tr>
             <tr>
-                <td rowspan="2"><input type='submit' value='Chercher !' name='btnCalendarSearch' id='btnCalendarSearch' /></td>
+                <td colspan="2" class="btnSubmit"><input type='submit' value='Chercher !' name='btnCalendarSearch' id='btnCalendarSearch' /></td>
             </tr>
         </table>
     </form>

@@ -39,10 +39,11 @@ if ($identifiant)
 {
     $participant = new Participant();
     $isParticipant = $participant->getParticipant($infosConnexion["login"]);
-    ////var_dump($isParticipant);
+
     if (!$isParticipant) {
         $organisateur = new Organisateur();
         $isOrganisateur = $organisateur->getOrganisateur($infosConnexion["login"]);
+
         // On récupère les informations nécessaires à l'affichage de la vue
         $infosVuesOrganisateur = array("nomOrganisateur" => $isOrganisateur["nomOrganisateur"], 
             "nbEventPending" => $organisateur->getNbEvenementEnCours($infosConnexion['login']), 
