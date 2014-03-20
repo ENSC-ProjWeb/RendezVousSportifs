@@ -86,17 +86,12 @@ $dataView['css'] = $css['stylePrincipal'];
 $dataView['zoneCentrale'] = $views['accueil'];
 
 if ($_SESSION['state'] === "connecteParticipant_accueil") {
-    $dataView['nomParticipant'] = $_SESSION["infosParticipant"]['nomParticipant'];
-    $dataView['prenomParticipant'] = $_SESSION["infosParticipant"]['prenomParticipant'];
-    $dataView['nbEventToCome'] = $_SESSION["infosParticipant"]["nbEventToCome"];
-    $dataView['nbEventWaiting'] = $_SESSION["infosParticipant"]["nbEventWaiting"];
+    $dataView['infosParticipant'] = $_SESSION["infosParticipant"];
     $dataView['title'] = TITLE." - Bienvenue";
     $dataView['zoneMenu'] = $views["menuConnecteParticipant"];
 } elseif ($_SESSION["state"] === "connecteOrganisateur_accueil") {
     $dataView['title'] = TITLE . " - Bienvenue !";
-    $dataView['nomOrganisateur'] = $_SESSION["infosOrganisateur"]["nomOrganisateur"];
-    $dataView['nbEventPending'] = $_SESSION["infosOrganisateur"]['nbEventPending'];
-    $dataView['nbSubscribing'] = $_SESSION["infosOrganisateur"]["nbSubscribing"];
+    $dataView['infosOrganisateur'] = $_SESSION["infosOrganisateur"];
     $dataView['zoneMenu'] = $views['menuConnecteOrganisateur'];
 } else {
     $dataView['title'] = TITLE." - Acc&egrave;s refus&eacute;";
