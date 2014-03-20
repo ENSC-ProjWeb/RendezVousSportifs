@@ -9,7 +9,7 @@
  * @version: 1.0.0
  * 
  * @todo faire une vérification par rapport au login déjà existant
- * @todo faire en sorte que l'image pour l'avatar soit sauvegardée
+ * @todo faire un contrôle pour l'upload des photos
  */
 /* -------------------------------------------------------
  * Recuperer les donnees d'entree nécessaires à l'action
