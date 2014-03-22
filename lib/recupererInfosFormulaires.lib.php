@@ -104,3 +104,24 @@ function recupererInfosConnexion() {
         "password" => filter_input(INPUT_POST, "password")
     );
 }
+
+/**
+ * Recuperer Infos Creation Evenement
+ * 
+ * Permet de récupérer les informations saisies lors de la création d'un événement
+ * 
+ * @return un tableau indicé avec les noms des champs des formulaires
+ */
+function recupererInfosCreationEvenement() {
+    return array(
+        "nomEvenement" => filter_input(INPUT_POST, "nomEvenement"),
+        "sportsAssocies" => $_POST["sportsAssocies"],   // sinon mauvaise gestion du tableau
+        "descEvenement" => filter_input(INPUT_POST, "descEvenement"),
+        "uploadImageEvenement" => $_FILES['uploadImageEvenement'],
+        "nbMinParticipants" => filter_input(INPUT_POST, "nbMinParticipants"),
+        "nbMaxParticipants" => filter_input(INPUT_POST, "nbMaxParticipants"),
+        "tarifEvenement" => filter_input(INPUT_POST, "tarifEvenement"),
+        "debutEvent" => filter_input(INPUT_POST, "dateDebut")." ".filter_input(INPUT_POST, "heureDebut"),
+        "finEvent" => filter_input(INPUT_POST, "dateFin")." ".filter_input(INPUT_POST, "heureFin")
+    );
+}

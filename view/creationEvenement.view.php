@@ -8,36 +8,13 @@
  * @todo: Essayer de placer en required les champs obligatoires (bug sinon avec la fonction afficher())
  */
 ?>
-
-
-<!--<script type="text/javascript">
-    function afficher()
-    {
-        var formOrganisateur = document.getElementById("formEnrOrganisateur");
-        var formParticipant = document.getElementById("formEnrParticipant");
-        var formGlobal = document.getElementById("globForm");
-        if (document.getElementById("chParticipant").checked === true)
-        {
-            formGlobal.style.display = "block";
-            formParticipant.style.display = "block";
-            formOrganisateur.style.display = "none";
-        }
-        else
-        {
-            formGlobal.style.display = "block";
-            formOrganisateur.style.display = "block";
-            formParticipant.style.display = "none";
-        }
-    }
-</script>-->
-
 <h2> Cr&eacute;er votre &eacute;v&eacute;nement </h2>
 
 <?php echo $dataView["message"]; ?>
 
 <a href="index.php?action=initialiser"> Revenir &agrave; l'accueil </a> <br/><br/>
 
-<form method="POST" action="index.php?action=validerCreationEvenement" enctype="multipart/form-data">
+<form method="POST" action="index.php?action=validerCreationEvenement" enctype="multipart/form-data" id="formCreationEvenement">
     <fieldset> 
         <legend> Descriptif de l'&eacute;v&eacute;nement </legend>
         <table>
@@ -46,8 +23,14 @@
                 <td><input type="text" size="25" name="nomEvenement" id="nomOrganisation" value='<?php if (isset($_POST["nomEvenement"])) echo $_POST["nomEvenement"]; ?>' /></td>
             </tr>
             <tr>
+                <td><label for="sportsAssocies">Sports :</label></td>
+                <td><select name="sportsAssocies[]" class="chosen-select" data-placeholder="S&eacute;lectionnez un sport..." multiple style="width:350px;">
+                        <?php foreach ($dataView['listeSports'] as $k=>$v) { $nomSport = $v["nomSport"]; echo "<option value='$nomSport'>$nomSport</option>"; } ?>
+                    </select></td>
+            </tr>
+            <tr>
                 <td><label for='descEvenement'>Description :</td>
-                <td><textarea rows="4" cols='50' name='descEvenement' placeholder='D&eacute;crivez votre &eacute;v&eacute;nement en quelques mots'> <?php if (isset($_POST['descEvenement'])) echo $_POST["descEvenement"];?></textarea></td> 
+                <td><textarea rows="4" cols='50' name='descEvenement' placeholder='D&eacute;crivez votre &eacute;v&eacute;nement en quelques mots'> <?php if (isset($_POST['descEvenement'])) echo $_POST["descEvenement"]; ?></textarea></td> 
             </tr>
             <tr>
                 <td><label for="uploadImageEvenement">Image de votre &eacute;v&eacute;nement</label></td>
@@ -64,13 +47,13 @@
                 <td><label for='nbMinParticipants'>Nombre minimum :</label></td>
                 <td><input type='number' min='0' max='9999' name='nbMinParticipants' value='<?php if (isset($_POST["nbMinParticipants"])) echo $_POST["nbMinParticipants"]; ?>' /></td>
             </tr>
-             <tr>
+            <tr>
                 <td><label for='nbMaxParticipants'>Nombre maximum :</label></td>
                 <td><input type='number' min='1' max='9999' name='nbMaxParticipants' value='<?php if (isset($_POST["nbMaxParticipants"])) echo $_POST["nbMaxParticipants"]; ?>' /></td>
             </tr> 
             <tr>
                 <td><label for='tarifEvenement'>Tarif (TTC) :</label></td>
-                <td><input type='number' min='0.00'> &euro;</td>
+                <td><input type='number' min='0.00' name="tarifEvenement"> &euro;</td>
             </tr>
         </table>
     </fieldset>
@@ -84,7 +67,7 @@
                 <td> Le <input type='date' name='dateDebut' placeholder='jj/mm/aaaa' value='<?php if (isset($_POST['dateDebut'])) echo $_POST['dateDebut']; ?>'/> &agrave; 
                     <input type='time' name='heureDebut' placeholder='hh:mm' value='<?php if (isset($_POST['heureDebut'])) echo $_POST['heureDebut']; ?>' /></td>
             </tr>
-             <tr>
+            <tr>
                 <td><label for='dateArrivee'>Fin :</label></td>
                 <td> Le <input type='date' name='dateFin' placeholder='jj/mm/aaaa' value='<?php if (isset($_POST['dateFin'])) echo $_POST['dateFin']; ?>'/> &agrave; 
                     <input type='time' name='heureFin' placeholder='hh:mm' value='<?php if (isset($_POST['heureFin'])) echo $_POST['heureFin']; ?>' /></td>
@@ -113,6 +96,12 @@
             </tr>
         </table>    
     </fieldset>
-<br/>
-<input type="submit" value="Cr&eacute;er"/>
+    <br/>
+    <input type="submit" value="Cr&eacute;er"/>
 </form>
+
+<script>
+$(".chosen-select").chosen({no_results_text: "Aucun r&eacute;sultat trouv&eacute;"});        
+</script>
+
+

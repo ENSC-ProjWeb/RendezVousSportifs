@@ -22,7 +22,7 @@
                     <a href="index.php?action=consulterCompte"/>Mon compte</a></td>
             </tr>
             <tr>
-                <td><a href="index.php?action=seDeconnecter">D&eacute;connexion</a></td>
+                <td><a href="index.php?action=initialiser">D&eacute;connexion</a></td>
             </tr>
         </table>
 </div>

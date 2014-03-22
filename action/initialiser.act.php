@@ -14,7 +14,11 @@
 // Recuperer les donnees d'entree nécessaires à l'action
 // -------------------------------------------------------
 
-// aucune donnée necessaire
+include $models["Modele"];
+include $models["Adresse"];
+include $models["Evenement"];
+
+$infosEvent = array();
 
 // -------------------------------------------------------
 // Executer l'action
@@ -22,6 +26,14 @@
 
 // On nettoie les variables de session
 $_SESSION=array();
+
+// On récupère les informations pour l'ensemble des événements
+$evenement = new Evenement();
+$listEvenement = $evenement->getListEvent();
+
+foreach ($listEvenement as $idEvent) {
+    $infosEvent[$idEvent] = $evenement->getInfosEventVignette($idEvent);
+}
 
 // -------------------------------------------------------
 // Definir le nouvel etat de l'application
@@ -40,7 +52,7 @@ $dataView['zoneRecherche']=$views['recherche'];
 $dataView['zoneMenu']=$views['menuNonConnecte'];
 $dataView['zoneCentrale']=$views['accueil'];
 $dataView['css']=$css['stylePrincipal'];
-
+$dataView['infosEvent'] = $infosEvent;
 // Enregistrement des donnees de la vue dans la session
 $_SESSION['dataView']=$dataView;
 

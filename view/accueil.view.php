@@ -9,43 +9,32 @@
 
 echo $dataView['message'];
 ?>
-<table width="50%">
+<table width="100%" border="2px">
     <?php
-        for ($i = 0; $i<4; $i++)
+        $infosEvent = $dataView["infosEvent"];
+
+        foreach ($infosEvent as $infoEvent)
         {
-            $nomImage = "./img/vignette.jpg";
+            $idEvent = $infoEvent["idEvent"];
+            $nomImage = $infoEvent["nomImage"];
+            $image = $infoEvent["cibleImage"];
+            $nomEvenement = $infoEvent["nomEvenement"];
+            $debutEvenement = $infoEvent["debutEvenement"];
+            $sportsAssocies = $infoEvent["sportsAssocies"];
+            $ville = $infoEvent["ville"];
+            $nomOrganisateur = $infoEvent["nomOrganisateur"];
             echo "<tr>
-                    <td><a href='#'><img src='$nomImage' alt='vignSport' width='250px'/></a></td>
-                    <td><a href='#'><img src='$nomImage' alt='vignSport' width='250px'/></a></td>
-                    <td><a href='#'><img src='$nomImage' alt='vignSport' width='250px'/></a></td>
-                </tr>
-                <tr>
-                    <td><a href='#'> Nom sport 1 </a></td>
-                    <td><a href='#'>Nom sport 2</a></td>
-                    <td><a href='#'>Nom sport 3</a></td>
-            </tr>
-            <tr>
-            <td><a href='#'>Nom event 1</a></td>
-            <td><a href='#'>Nom event 2</a></td>
-            <td><a href='#'>Nom event 3</a></td>
-            </tr>
-            <tr>
-            <td>Par : <a href='#'>organisateur 1</a></td>
-            <td>Par : <a href='#'>organisateur 2</a></td>
-            <td>Par : <a href='#'>organisateur 3</a></td>
-            </tr>
-            <tr>
-            <td>Le 01/23/4567 à 89h01</td>
-            <td>Le 01/23/4567 à 89h01</td>
-            <td>Le 01/23/4567 à 89h01</td>
-            </tr>
-            <tr>
-            <td> A Bordeaux </td>
-            <td> A Bayonne </td>
-            <td> A Gif-Sur-Yvette </td>
-            </tr>";
+                    <td rowspan='4'><a href=index.php?action=consulterEvenement&idEvent=$idEvent><img src=$image alt=$nomImage width='250px'/></a></td>
+                    <td><a href='index.php?action=consulterEvenement&id=$idEvent'>$nomEvenement</a></td></tr>";
+            echo "<tr><td>";
+            for ($i = 0; $i<count($sportsAssocies); $i++) {
+                echo "$sportsAssocies[$i] "; 
+            }
+            echo "</td></tr>";
+            echo "<tr><td>Le $debutEvenement &agrave; $ville</td></tr>";
+            echo "<tr><td>Par $nomOrganisateur</td></tr>";
         }
-   ?> 
+     ?>
 </table>
 
 

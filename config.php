@@ -70,6 +70,6 @@ $states['connecteParticipant_accueil'] = array('displayTpl' => 'tplPrincipal',
         'allowedActs' => array('initialiser'));
 
 $states['connecteOrganisateur_creationEvenement'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser'));
+        'allowedActs' => array('initialiser', 'validerCreationEvenement'));
 
 

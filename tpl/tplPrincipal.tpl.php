@@ -13,6 +13,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link type="text/css" rel="stylesheet" href="<?php echo $dataView['css']; ?>" />
+        <link type="text/css" rel="stylesheet" href="./css/chosen.min.css" /> 
+        <script src="./js/jquery-2.1.0.min.js"></script>
+        <script src="./js/chosen.jquery.min.js"></script>
         <title><?php echo $dataView['title']; ?></title>
     </head>
     <body>

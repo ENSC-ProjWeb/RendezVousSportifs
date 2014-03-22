@@ -145,3 +145,24 @@ function verifierFormulaireLocalisation($infosLoc) {
         return VALIDE;
     }
 }
+
+
+function verifierFormulaireCreationEvenement($infosEvenement) {
+    define("EMPTY_NAME", -1);
+    define('EMPTY_DATE_DEBUT', -2);
+    define("EMPTY_SPORT", -3);
+    
+    $nomEvenement = $infosEvenement["nomEvenement"];
+    $debutEvent = $infosEvenement["debutEvent"];
+    $sportsAssocies = $infosEvenement["sportsAssocies"];
+    
+    if (empty($nomEvenement)) {
+        return EMPTY_NAME;
+    } elseif (empty($debutEvent)) {
+        return EMPTY_DATE_DEBUT;
+    } elseif (empty($sportsAssocies)) {
+        return EMPTY_SPORT;
+    } else {
+        return VALIDE;
+    }
+}

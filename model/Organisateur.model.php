@@ -66,10 +66,10 @@ class Organisateur extends Modele {
      * @return int correspondant aux nombres d'événéments en cours
      */
     public function getNbEvenementEnCours($login) {
-        $req = "SELECT COUNT(ORGANISER.idEvent) FROM ORGANISATEUR, ORGANISER, EVENEMENT WHERE ORGANISER.idOrganisateur = (SELECT idOrganisateur FROM ORGANISATEUR WHERE loginUser = :login) AND debutEvent >= CURDATE()";
+        $req = "SELECT COUNT( ORGANISER.idEvent ) AS NBEVENTENCOURS FROM ORGANISER, EVENEMENT, ORGANISATEUR WHERE ORGANISER.idEvent = EVENEMENT.idEvent AND ORGANISER.idOrganisateur = ORGANISATEUR.idOrganisateur AND ORGANISATEUR.loginUser = :login";
         $infos = $this->executerRequete($req, array("login" => $login));
         $res = $infos->fetch();
-        return ($res["COUNT(idEvent)"] !== NULL ) ? $res["COUNT(idEvent)"] : 0;
+        return ($res["NBEVENTENCOURS"] !== 0 ) ? $res["NBEVENTENCOURS"] : 0;
     }
     
     /**

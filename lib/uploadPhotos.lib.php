@@ -11,7 +11,7 @@
  * @author Guillaume CARAYON
  * @version 1.0.0
  * 
- * Photo qui gère l'envoie de la photo uploadé sur le répertoire correspondant dans le serveur
+ * Fonction qui gère l'envoie de la photo uploadé sur le répertoire correspondant dans le serveur
  * @param array $file : tableau $_FILE['nomFichier'] correspondant
  * @param type $rep : répertoire dans lequel doit être envoyé la photo
  * @return array tableau indicé "nomPhoto" qui correspond au nom de la photo et "empPhoto" qui correspond à l'emplacement de la photo sur le serveur
@@ -47,7 +47,7 @@ function uploadPhotos($file, $rep) {
                         // On peut uploader la photo sur le serveur
                         if (is_uploaded_file($file['tmp_name'])) {
                             $nomPhoto = md5(uniqid(rand(), true));
-                            $nomFinal = "{$rep}./.{$nomPhoto}.{$extPresumee}";
+                            $nomFinal = "{$rep}/{$nomPhoto}.{$extPresumee}";
                             if (move_uploaded_file($file['tmp_name'], $nomFinal)) {
                                 return array("nomPhoto" => $nomPhoto,
                                     "empPhoto" => $nomFinal);

@@ -91,16 +91,42 @@ function retournerMessageErreurVerifLoc($verifLoc) {
     return $message;
 }
 
-
+/**
+ * Retourner message erreur selon la vérification de l'upload
+ * 
+ * @author Guillaume CARAYON
+ * 
+ * @param int $resUpload valeur retournée lors de l'upload de la photo
+ * @return string message d'erreur à afficher
+ */
 function retournerMessageErreurVerifUpload($resUpload) {
     switch ($resUpload) {
         case FAIL_UPLOAD : $message = "L'upload a échoué !"; break;
         case UNMATCH_MIME_TYPE : $message = "Le type n'est pas valide !"; break;
         case BAD_TYPE : $message = "Le type n'est pas valide !"; break;
-        case HEAVY_FILE : $message = "Le fichie est trop lourd !"; break;
+        case HEAVY_FILE : $message = "Le fichier est trop lourd !"; break;
         case ERROR_FILE : $message = "Erreur lors de l'upload"; break;
         case EMPTY_FILE : $message = "Le fichier est vide !"; break;
         default: $message = "Upload non valide";
+    }
+    
+    return $message;
+}
+
+/**
+ * Retourner message erreur selon la vérification de l'événement
+ * 
+ * @author Guillaume CARAYON
+ *  
+ * @param int $verifEvenement valeur retournée lors de la vérification de l'événement
+ * @return string message d'erreur à afficher
+ */
+function retournerMessageErreurVerifEvenement($verifEvenement) {
+    switch ($verifEvenement) {
+        case EMPTY_NAME : $message = "Veuillez saisir un nom pour votre &eacute;v&eacute;nement"; break;
+        case EMPTY_DATE_DEBUT : $message = "Veuillez saisir le d&eacute;but de la date"; break;
+        case EMPTY_SPORT : $message = "Veuillez s&eacute;lectionner un sport"; break;
+        default: $message = "Formulaire non valide";
     }
     
     return $message;
