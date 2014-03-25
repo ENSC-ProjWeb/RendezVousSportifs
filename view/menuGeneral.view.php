@@ -5,7 +5,7 @@
         <li><a href='#'>Football</a></li>
         <li><a href='#'>Rugby</a></li>
         <li><a href='#'>Natation</a></li>
-        <li><a href='#'>Cricket</a></li>
+        <li><a href='#'>Basketball</a></li>
         <li><a href='#'>Handball</a></li>
         <li><a href='#'>Autres sports...</a></li>
     </ul>
