@@ -125,3 +125,4 @@ function recupererInfosCreationEvenement() {
         "finEvent" => filter_input(INPUT_POST, "dateFin")." ".filter_input(INPUT_POST, "heureFin")
     );
 }
+
