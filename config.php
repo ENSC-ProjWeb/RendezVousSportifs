@@ -13,7 +13,7 @@ include "listerFichiers.php";
 /* -------------------------------- PARAMETRES CONSTANTS GENERAUX --------------------------- */
 
 // Titre de l'application
-define('TITLE', 'ProjetSiteWebSport');
+define('TITLE', 'RVS');
 
 // Paramètres BDD
 define('SGBD', 'mysql');
@@ -57,19 +57,45 @@ $initState = 'nonConnecte_accueil';
 
 $states = array();
 
+/*************************
+ *  ETAT EN NON CONNECTE *
+ *************************/
+
 $states['nonConnecte_accueil'] = array('displayTpl' => 'tplPrincipal',
-    'allowedActs' => array('initialiser', 'inscrire', 'seConnecter'));
+    'allowedActs' => array('initialiser', 'inscrire', 'seConnecter', 'consulterEvenement'));
 
 $states['nonConnecte_enregistrement'] = array('displayTpl' => 'tplPrincipal',
         'allowedActs' => array('initialiser', 'validerInscription', 'inscrire', 'seConnecter'));
 
-$states['connecteOrganisateur_accueil'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'creerEvenement'));
+$states['nonConnecte_consultationEvenement'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'inscrire', 'seConnecter'));
+
+$states['nonConnecte_consultationResultatRecherche'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'inscrire', 'seConnecter', 'consulterEvenement'));
+
+/*************************
+ *  ETAT EN PARTICIPANT  *
+ *************************/
 
 $states['connecteParticipant_accueil'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser'));
+        'allowedActs' => array('initialiser', 'consulterEvenement'));
 
+$states['connecteParticipant_consultationEvenement'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'poster', 'inscrireEvenement'));
+
+/*************************
+ *  ETAT EN ORGANISATEUR  *
+ *************************/
 $states['connecteOrganisateur_creationEvenement'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'validerCreationEvenement'));
+        'allowedActs' => array('initialiser', 'validerCreationEvenement', 'consulterListeInscriptionsEnAttente'));
+
+$states['connecteOrganisateur_accueil'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'creerEvenement', 'consulterEvenement', 'consulterListeInscriptionsEnAttente'));
+
+$states['connecteOrganisateur_consultationEvenement'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'poster', 'consulterListeInscriptionsEnAttente'));
+
+$states['connecteOrganisateur_consultationInscriptionsEnAttente'] = array('displayTpl' => "tplPrincipal",
+        "allowedActs" => array('initialiser', 'consulterListeInscriptionsEnAttente', 'validerInscriptionEvenement', 'refuserInscriptionEvenement', 'consulterEvenement'));
 
 

@@ -94,4 +94,11 @@ class Participant extends Modele {
         
         return $statut;
     }
+    public function getEvenementParticipant($login)
+    {
+        $getEvenementParticipant = "SELECT idUser FROM PARTICIPANT WHERE loginUser = $login";
+        
+    }
+    
+    
  } 
