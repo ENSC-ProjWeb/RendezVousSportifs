@@ -21,22 +21,29 @@ include $models['Adresse'];
 include $models['Utilisateur'];
 include $models['Organisateur'];
 include $models['Participant'];
+include $models['Evenement'];
 
 $user = new Utilisateur();
 $infosConnexion = recupererInfosConnexion();
 //var_dump($infosConnexion);
 $infosUser = $user->getUtilisateur($infosConnexion["login"]);
-//var_dump($infosUser);
+//var_dump($infosUser
+
 
 /* ---------------------------------------------------------
  * Executer l'action
-/* --------------------------------------------------------- */
+  /* --------------------------------------------------------- */
+
+$evenement = new Evenement();
+$listEvenement = $evenement->getListEvent();
+foreach ($listEvenement as $idEvent) {
+    $infosEvent[$idEvent] = $evenement->getInfosEventVignette($idEvent);
+}
 
 // On vérifie que le mot de passe récupéré selon le login est correct
 $identifiant = checkPassword($infosConnexion["password"], $infosUser["mdpUser"]);
 
-if ($identifiant)
-{
+if ($identifiant) {
     $participant = new Participant();
     $isParticipant = $participant->getParticipant($infosConnexion["login"]);
 
@@ -45,8 +52,8 @@ if ($identifiant)
         $isOrganisateur = $organisateur->getOrganisateur($infosConnexion["login"]);
 
         // On récupère les informations nécessaires à l'affichage de la vue
-        $_SESSION["infosOrganisateur"] = array("nomOrganisateur" => $isOrganisateur["nomOrganisateur"], 
-            "nbEventPending" => $organisateur->getNbEvenementEnCours($infosConnexion['login']), 
+        $_SESSION["infosOrganisateur"] = array("nomOrganisateur" => $isOrganisateur["nomOrganisateur"],
+            "nbEventPending" => $organisateur->getNbEvenementEnCours($infosConnexion['login']),
             "nbSubscribing" => $organisateur->getNbInscriptionEnCours($infosConnexion['login']));
     } else {
         // On récupère les informations nécessaires à l'affichage de la vue'
@@ -55,8 +62,10 @@ if ($identifiant)
             "nbEventToCome" => $participant->getNbEvenementAVenir($infosConnexion["login"]),
             "nbEventWaiting" => $participant->getNbEvenementEnAttente($infosConnexion['login']));
     }
+    
+ 
     $message = utf8_encode("Vous &ecirc;tes bien connect&eacute; !");
-} else { 
+} else {
     $message = utf8_encode("Vos identifiants sont incorrects !");
 }
 
@@ -87,15 +96,18 @@ $dataView['zoneCentrale'] = $views['accueil'];
 
 if ($_SESSION['state'] === "connecteParticipant_accueil") {
     $dataView['infosParticipant'] = $_SESSION["infosParticipant"];
-    $dataView['title'] = TITLE." - Bienvenue";
+    $dataView['title'] = TITLE . " - Bienvenue";
     $dataView['zoneMenu'] = $views["menuConnecteParticipant"];
+    $dataView['infosEvent'] = $infosEvent;
 } elseif ($_SESSION["state"] === "connecteOrganisateur_accueil") {
     $dataView['title'] = TITLE . " - Bienvenue !";
     $dataView['infosOrganisateur'] = $_SESSION["infosOrganisateur"];
     $dataView['zoneMenu'] = $views['menuConnecteOrganisateur'];
+    $dataView['infosEvent'] = $infosEvent;
 } else {
-    $dataView['title'] = TITLE." - Acc&egrave;s refus&eacute;";
+    $dataView['title'] = TITLE . " - Acc&egrave;s refus&eacute;";
     $dataView['zoneMenu'] = $views['menuNonConnecte'];
+    $dataView['infosEvent'] = $infosEvent;
 }
 
 // Enregistrement des donnees de la vue dans la session
