@@ -9,7 +9,7 @@
 
 echo $dataView['message'];
 ?>
-<table width="100%" border="2px">
+<table width="150%">
     <?php
         $infosEvent = $dataView["infosEvent"];
 
@@ -24,8 +24,8 @@ echo $dataView['message'];
             $ville = $infoEvent["ville"];
             $nomOrganisateur = $infoEvent["nomOrganisateur"];
             echo "<tr>
-                    <td rowspan='4'><a href=index.php?action=consulterEvenement&idEvent=$idEvent><img src=$image alt=$nomImage width='250px'/></a></td>
-                    <td><a href='index.php?action=consulterEvenement&id=$idEvent'>$nomEvenement</a></td></tr>";
+                    <td rowspan='4' width='250px'><a href=index.php?action=consulterEvenement&idEvent=$idEvent><img src=$image alt=$nomImage width='250px'/></a></td>
+                    <td><a href='index.php?action=consulterEvenement&idEvent=$idEvent'>$nomEvenement</a></td></tr>";
             echo "<tr><td>";
             for ($i = 0; $i<count($sportsAssocies); $i++) {
                 echo "$sportsAssocies[$i] "; 
