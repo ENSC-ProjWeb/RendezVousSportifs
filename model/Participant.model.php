@@ -62,10 +62,10 @@ class Participant extends Modele {
      * @return int nombre d'événements à venir
      */
     public function getNbEvenementAVenir($login) {
-        $req = "SELECT COUNT(idEvent) FROM INSCRIRE, PARTICIPANT WHERE PARTICIPANT.loginUser = :login AND INSCRIRE.idParticipant = PARTICIPANT.idParticipant AND INSCRIRE.idEvent = (SELECT idEvent FROM EVENEMENT WHERE debutEvent >= CURDATE()) AND INSCRIRE.statutInscription = 'I'";
+        $req = "SELECT COUNT( idEvent ) AS NBEVENTTOCOME FROM INSCRIRE, PARTICIPANT WHERE INSCRIRE.idParticipant = PARTICIPANT.idParticipant AND PARTICIPANT.loginUser =  :login AND INSCRIRE.statutInscription =  'I'";
         $infos = $this->executerRequete($req, array("login" => $login));
         $res = $infos->fetch();
-        return $res["COUNT(idEvent)"];
+        return $res["NBEVENTTOCOME"];
     }
 
     /**
@@ -76,9 +76,22 @@ class Participant extends Modele {
      * @return int nombre d'événements en attente
      */
     public function getNbEvenementEnAttente($login) {
-        $req = "SELECT COUNT(idEvent) FROM INSCRIRE, PARTICIPANT WHERE PARTICIPANT.loginUser = :login AND INSCRIRE.idParticipant = PARTICIPANT.idParticipant AND INSCRIRE.idEvent = (SELECT idEvent FROM EVENEMENT WHERE debutEvent >= CURDATE()) AND INSCRIRE.statutInscription = 'PI'";
+        $req = "SELECT COUNT( idEvent ) AS NBEVENTTOCOME FROM INSCRIRE, PARTICIPANT WHERE INSCRIRE.idParticipant = PARTICIPANT.idParticipant AND PARTICIPANT.loginUser =  :login AND INSCRIRE.statutInscription =  'PI'";
         $infos = $this->executerRequete($req, array("login" => $login));
         $res = $infos->fetch();
-        return $res["COUNT(idEvent)"];
+        return $res["NBEVENTTOCOME"];
+    }
+    
+    
+    public function getStatutInscriptionEvent($idEvent, $login) {
+        $resIdParticipant = $this->getParticipant($login);
+        $idParticipant = $resIdParticipant["idParticipant"];
+  
+        $reqStatut = "SELECT statutInscription FROM INSCRIRE WHERE idEvent = :idEvent AND idParticipant = :idParticipant";
+        $resStatut = $this->executerRequete($reqStatut, array("idEvent" => $idEvent, "idParticipant" => $idParticipant));
+        $infosStatut = $resStatut->fetch();
+        $statut = $infosStatut["statutInscription"];
+        
+        return $statut;
     }
  } 
