@@ -80,9 +80,17 @@ class Organisateur extends Modele {
      * @return int nombre d'inscriptions pendantes
      */
     public function getNbInscriptionEnCours($login) {
-        $req = "SELECT COUNT(statutInscription) FROM INSCRIRE, EVENEMENT WHERE INSCRIRE.idEvent = (SELECT idEvent FROM ORGANISER, ORGANISATEUR WHERE ORGANISER.idOrganisateur = ORGANISATEUR.idOrganisateur AND ORGANISATEUR.loginUser = :login) AND statutInscription = 'PI' AND debutEvent >= CURDATE()";
+        $req = "SELECT COUNT(EVENEMENT.idEvent) AS NBINSCRIPTION FROM INSCRIRE, ORGANISER, EVENEMENT, ORGANISATEUR, UTILISATEUR WHERE INSCRIRE.statutInscription = 'PI' AND INSCRIRE.idEvent = EVENEMENT.idEvent AND ORGANISER.idOrganisateur = ORGANISATEUR.idOrganisateur AND ORGANISATEUR.loginUser = :login";
         $infos = $this->executerRequete($req, array("login" => $login));
         $res = $infos->fetch();
-        return ($res["COUNT(idEvent)"] !== NULL ) ? $res["COUNT(idEvent)"] : 0;
+        return ($res["NBINSCRIPTION"] !== NULL ) ? $res["NBINSCRIPTION"] : 0;
+    }
+    
+    
+    public function getListeInscriptionsEnAttente($login) {
+        $req = "SELECT EVENEMENT.idEvent AS idEvent, EVENEMENT.nomEvent AS nomEvent, UTILISATEUR.loginUser AS login FROM EVENEMENT, INSCRIRE, ORGANISER, UTILISATEUR, ORGANISATEUR, PARTICIPANT WHERE INSCRIRE.statutInscription = 'PI' AND INSCRIRE.idParticipant = PARTICIPANT.idParticipant AND PARTICIPANT.loginUser = UTILISATEUR.loginUser AND INSCRIRE.idEvent = EVENEMENT.idEvent AND EVENEMENT.idEvent = ORGANISER.idEvent AND ORGANISER.idOrganisateur = ORGANISATEUR.idOrganisateur AND ORGANISATEUR.loginUser = :loginUser";
+        $infos = $this->executerRequete($req, array("loginUser" => $login));
+        $res = $infos->fetchAll();
+        return $res;
     }
 }
