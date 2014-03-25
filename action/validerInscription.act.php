@@ -22,6 +22,7 @@ include $models['Utilisateur'];
 include $models['Organisateur'];
 include $models['Participant'];
 include $models['Image'];
+include $models['Evenement'];
 
 $infosGlobales = recupererInfosGlobales();      // tableau contenant les infos de connexions
 //var_dump($infosGlobales);
@@ -115,6 +116,16 @@ if (!$inscriptionValide) {
         $message = utf8_encode("Votre compte a bien &eacute;t&eacute; ajout&eacute; !");
     } else {
         $message = utf8_encode("Votre compte n'a pas pu &ecirc;tre ajout&eacute; !");
+    }
+}
+
+if ($inscriptionValide && $res)
+{
+    $evenement = new Evenement();
+    $listEvenement = $evenement->getListEvent();
+
+    foreach ($listEvenement as $idEvent) {
+        $infosEvent[$idEvent] = $evenement->getInfosEventVignette($idEvent);
     }
 }
 
