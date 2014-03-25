@@ -25,7 +25,7 @@ include $models['Image'];
 include $models['Evenement'];
 
 $infosEvenement = recupererInfosCreationEvenement();  
-var_dump($infosEvenement);
+//var_dump($infosEvenement);
 $login = $_SESSION["login"];
 $organisateur = new Organisateur();
 $infosOrganisateur = $organisateur->getOrganisateur($login);
@@ -69,6 +69,16 @@ if ($verifInfosEvenement === VALIDE) {
     $message = retournerMessageErreurVerifEvenement($verifInfosEvenement);
 }
 
+if ($creationValide) {
+    $evenement = new Evenement();
+    $listEvenement = $evenement->getListEvent();
+
+    foreach ($listEvenement as $idEvent) {
+        $infosEvent[$idEvent] = $evenement->getInfosEventVignette($idEvent);
+    }
+
+}
+
 
 /* -------------------------------------------------------
  *  Definir le nouvel etat de l'application
@@ -94,6 +104,7 @@ $dataView['infosOrganisateur'] = $_SESSION["infosOrganisateur"];
 if ($_SESSION['state'] === "connecteOrganisateur_accueil") {
     $dataView['title'] = TITLE . " - Création valide !";
     $dataView['zoneCentrale'] = $views['accueil'];
+    $dataView['infosEvent'] = $infosEvent;
 } else {
     $dataView['title'] = TITLE . " - Création refusé !";
     $dataView['zoneCentrale'] = $views['creationEvenement'];
