@@ -3,7 +3,6 @@
  *
  * Feuille de style du template principale et des fragments de vues qui en découlent
  *
- * @author: Guillaume CARAYON
  * @version: 1.0.1
  *
 */
@@ -17,7 +16,6 @@
 #zoneHaute
 {
     text-align: center;  
-    font-family: Open Sans;
 ;}
 
 #zoneRecherche
@@ -25,7 +23,8 @@
     font-family: Open Sans;
     font-size: 13px;
     width:63em;
-    margin: 0 auto;
+    margin-left: 27em;
+    margin-top: 1em;
     padding-left: 2em;
 }
 
@@ -37,6 +36,7 @@
     width: 19em;
     margin-left: 1em;
     margin-top: 0px;
+    border-right: solid lightgrey 1px;
 }
 
 #zoneMenu #zoneConnexion, #zoneMenu #zoneCalendrier, #zoneMenu #zoneMenuSports
@@ -74,10 +74,12 @@
     font-style: normal;
 }
 
+
 #zoneCentrale
 {
+    font-family: Arial;
     position: absolute;
-    margin-left: 20em;
+    margin-left: 27em;
     margin-top: 1.5em;
 }
 
