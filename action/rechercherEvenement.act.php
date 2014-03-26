@@ -5,8 +5,7 @@
  * 
  * Action qui permet de rechercher un événement (etat niveauConnection_consultationResultatRecherche)
  * 
- * @author: Guillaume CARAYON
- * @version: 1.0.0
+ * 
  */
 
 // -------------------------------------------------------
@@ -23,7 +22,7 @@ $motCle = filter_input(INPUT_POST, 'motCle');
 // Executer l'action
 // ---------------------------------------------------------
 
-$monEtat = definirNiveauDeConnexion($_SESSION['state']);
+$niveauConnexion = definirNiveauDeConnexion($_SESSION['state']);
 
 // On récupère les informations pour l'ensemble des événements
 $evenement = new Evenement();
@@ -33,10 +32,10 @@ foreach ($listEvenement as $idEvent) {
     $infosEvent[$idEvent] = $evenement->getInfosEventVignette($idEvent);
 }
 
+
 // -------------------------------------------------------
 // Definir le nouvel etat de l'application
 // -------------------------------------------------------
-
 $_SESSION['state']=$niveauConnexion.'_consultationResultatRecherche';  
 
 // -------------------------------------------------------
@@ -47,11 +46,19 @@ $_SESSION['state']=$niveauConnexion.'_consultationResultatRecherche';
 $dataView['title']=TITLE." - Accueil";
 $dataView['zoneHaute']=$views['banniere'];
 $dataView['zoneRecherche']=$views['recherche'];
-$dataView['zoneMenu']=$views['menuNonConnecte'];
-$dataView['zoneCentrale']=$views['accueil'];
+$dataView['zoneCentrale']=$views['consultationResultatRecherche'];
+
+if ($niveauConnexion === "nonConnecte") {
+    $dataView['zoneMenu']=$views['menuNonConnecte'];
+} elseif ($niveauConnexion === "connecteParticipant") {
+    $dataView['zoneMenu']=$views['menuConnecteParticipant'];
+    $dataView['infosOrganisateur'] = $_SESSION['infosOrganisateur'];
+} else {
+    $dataView['zoneMenu']=$views['menuConnecteOrganisateur'];
+    $dataView["infosParticipant"] = $_SESSION['infosParticipant'];
+}
 $dataView['css']=$css['stylePrincipal'];
 $dataView['infosEvent'] = $infosEvent;
 // Enregistrement des donnees de la vue dans la session
 $_SESSION['dataView']=$dataView;
 
-?>  
