@@ -1,11 +1,7 @@
 <?php
 /**
  * Fichier de configuration du contrôleur
- * 
- * @author: Gabriel BELLAKHDAR
- * @author: Guillaume CARAYON
- * 
- * @todo: compléter la liste des états
+ *
  */
 
 include "listerFichiers.php";
@@ -13,7 +9,7 @@ include "listerFichiers.php";
 /* -------------------------------- PARAMETRES CONSTANTS GENERAUX --------------------------- */
 
 // Titre de l'application
-define('TITLE', 'RVS');
+define('TITLE', 'RVS - RendezVousSportifs');
 
 // Paramètres BDD
 define('SGBD', 'mysql');
@@ -62,40 +58,53 @@ $states = array();
  *************************/
 
 $states['nonConnecte_accueil'] = array('displayTpl' => 'tplPrincipal',
-    'allowedActs' => array('initialiser', 'inscrire', 'seConnecter', 'consulterEvenement'));
+    'allowedActs' => array('initialiser', 'inscrire', 'seConnecter', 'consulterEvenement', 'rechercherEvenement', 'consulterListeEvenementsParSport'));
 
 $states['nonConnecte_enregistrement'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'validerInscription', 'inscrire', 'seConnecter'));
+        'allowedActs' => array('initialiser', 'validerInscription', 'inscrire', 'seConnecter', 'consulterListeEvenementsParSport'));
 
 $states['nonConnecte_consultationEvenement'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'inscrire', 'seConnecter'));
+        'allowedActs' => array('initialiser', 'inscrire', 'seConnecter', 'consulterListeEvenementsParSport'));
 
 $states['nonConnecte_consultationResultatRecherche'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'inscrire', 'seConnecter', 'consulterEvenement'));
+        'allowedActs' => array('initialiser', 'inscrire', 'seConnecter', 'consulterEvenement', 'consulterListeEvenementsParSport'));
+
+$states['nonConnecte_consultationListeEvenementParSport'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'inscrire', 'seConnecter', 'consulterEvenement', 'rechercherEvenement', 'consulterListeEvenementsParSport'));
 
 /*************************
  *  ETAT EN PARTICIPANT  *
  *************************/
 
 $states['connecteParticipant_accueil'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'consulterEvenement'));
+        'allowedActs' => array('initialiser', 'consulterEvenement', 'rechercherEvenement', 'consulterListeEvenementsParSport'));
 
 $states['connecteParticipant_consultationEvenement'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'poster', 'inscrireEvenement'));
+        'allowedActs' => array('initialiser', 'poster', 'inscrireEvenement', 'rechercherEvenement', 'consulterListeEvenementsParSport'));
+
+$states['connecteParticipant_consultationResultatRecherche'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'consulterEvenement', 'consulterListeEvenementsParSport', 'rechercherEvenement'));
+
+$states['connecteParticipant_consultationListeEvenementParSport'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'inscrire', 'seConnecter', 'consulterEvenement', 'rechercherEvenement', 'consulterListeEvenementsParSport'));
 
 /*************************
  *  ETAT EN ORGANISATEUR  *
  *************************/
+
 $states['connecteOrganisateur_creationEvenement'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'validerCreationEvenement', 'consulterListeInscriptionsEnAttente'));
+        'allowedActs' => array('initialiser', 'validerCreationEvenement', 'consulterListeInscriptionsEnAttente', 'rechercherEvenement', 'consulterListeEvenementsParSport'));
 
 $states['connecteOrganisateur_accueil'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'creerEvenement', 'consulterEvenement', 'consulterListeInscriptionsEnAttente'));
+        'allowedActs' => array('initialiser', 'creerEvenement', 'consulterEvenement', 'rechercherEvenement', 'consulterListeEvenementsParSport', 'consulterListeInscriptionsEnAttente'));
 
 $states['connecteOrganisateur_consultationEvenement'] = array('displayTpl' => 'tplPrincipal',
-        'allowedActs' => array('initialiser', 'poster', 'consulterListeInscriptionsEnAttente'));
+        'allowedActs' => array('initialiser', 'poster', 'consulterListeInscriptionsEnAttente', 'rechercherEvenement', 'consulterListeEvenementsParSport'));
+
+$states['connecteOrganisateur_consultationResultatRecherche'] = array('displayTpl' => 'tplPrincipal',
+        'allowedActs' => array('initialiser', 'consulterEvenement', 'rechercherEvenement', 'consulterListeEvenementsParSport'));
 
 $states['connecteOrganisateur_consultationInscriptionsEnAttente'] = array('displayTpl' => "tplPrincipal",
-        "allowedActs" => array('initialiser', 'consulterListeInscriptionsEnAttente', 'validerInscriptionEvenement', 'refuserInscriptionEvenement', 'consulterEvenement'));
+        "allowedActs" => array('initialiser', 'consulterListeInscriptionsEnAttente', 'validerInscriptionEvenement', 'refuserInscriptionEvenement', 'consulterEvenement', 'rechercherEvenement', 'consulterListeEvenementsParSport'));
 
 
