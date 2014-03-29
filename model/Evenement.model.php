@@ -80,6 +80,12 @@ class Evenement extends Modele
         return $infosImage  = $resImageEvent->fetch();
     }
     
+    /**
+     * GetAllImageEvent
+     * 
+     * @param type $idEvent
+     * @return type
+     */
     public function getAllImageEvent($idEvent) {
         $reqImageEvent = "SELECT nomImage, cibleImage FROM IMAGE, CONTENIR WHERE CONTENIR.idEvent = :idEvent AND CONTENIR.idImage = IMAGE.idImage";
         $paramsReqImageEvent = array("idEvent" => $idEvent);
@@ -88,6 +94,11 @@ class Evenement extends Modele
     }
     
     
+    /**
+     * 
+     * @param type $idEvent
+     * @return type
+     */
     public function getPrimaryInfosEvent($idEvent) {
         $reqEvent = "SELECT nomEvent, nbParticipantsMax, nbParticipantsMin, prixEvent, descriptionEvent, debutEvent, finEvent FROM EVENEMENT WHERE idEvent = :idEvent ";
         $paramsReqEvent = array("idEvent" => $idEvent);
@@ -96,6 +107,11 @@ class Evenement extends Modele
     }
     
     
+    /**
+     * 
+     * @param type $idEvent
+     * @return type
+     */
     public function getLinkedSports($idEvent) {
         $reqSports = "SELECT nomSport FROM SPORT, REGROUPER WHERE REGROUPER.idEvent = :idEvent AND REGROUPER.idSport = SPORT.idSport";
         $paramReqSports = array("idEvent" => $idEvent);
@@ -103,6 +119,11 @@ class Evenement extends Modele
         return $infosSports = $resSports->fetchAll(PDO::FETCH_COLUMN);
     }
     
+    /**
+     * 
+     * @param type $idEvent
+     * @return type
+     */
     public function getLinkedLocation($idEvent) {
         $reqVille = "SELECT numVoieAdresse, nomVoieAdresse, cptAdresse, codePostalAdresse, villeAdresse, dptAdresse, regionAdresse, paysAdresse FROM ADRESSE, EVENEMENT WHERE EVENEMENT.idEvent = :idEvent AND EVENEMENT.idAdresse = ADRESSE.idAdresse";
         $paramReqVille = array("idEvent" => $idEvent);
@@ -208,12 +229,24 @@ class Evenement extends Modele
     }
     
     
-    
+    /**
+     * 
+     * @param type $motCle
+     * @return type
+     */
     public function getListEventSearched($motCle) {
-        $req = "SELECT idEvent FROM EVENEMENT WHERE nomEvent LIKE %:motCle%";
-        $res = $this->executerRequete($req, array("motCle" => $motCle));
-        $resultatRecherche = $res->fetchAll();
+        $req = "SELECT idEvent FROM EVENEMENT WHERE nomEvent LIKE '%$motCle%'";
+        $res = $this->executerRequete($req);
+        $resultatRecherche = $res->fetchAll(PDO::FETCH_COLUMN, 0);
         return $resultatRecherche;
+    }
+    
+    
+    public function getListEventParSport($idSport) {
+        $req = "SELECT idEvent FROM REGROUPER WHERE REGROUPER.idSport = :idSport";
+        $res = $this->executerRequete($req, array("idSport" => $idSport));
+        $resultat = $res->fetchAll(PDO::FETCH_COLUMN, 0);
+        return $resultat;
     }
         
 }

@@ -14,7 +14,9 @@
 // Recuperer les donnees d'entree nécessaires à l'action
 // -------------------------------------------------------
 
-// aucune donnée necessaire
+include $models["Sport"];
+
+$sport = new Sport();
 
 // -------------------------------------------------------
 // Executer l'action
@@ -39,6 +41,7 @@ $dataView['zoneRecherche']=$views['recherche'];
 $dataView['zoneMenu']=$views['menuNonConnecte'];
 $dataView['zoneCentrale']=$views['enregistrement'];
 $dataView['css']=$css['stylePrincipal'];
+$dataView['listeSports'] = $sport->getFiveTopSports();
 
 // Enregistrement des donnees de la vue dans la session
 $_SESSION['dataView']=$dataView;

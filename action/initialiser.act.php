@@ -15,10 +15,12 @@
 // -------------------------------------------------------
 
 include $models["Modele"];
+include $models["Sport"];
 include $models["Adresse"];
 include $models["Evenement"];
 
 $infosEvent = array();
+$sport = new Sport();
 
 // -------------------------------------------------------
 // Executer l'action
@@ -50,9 +52,10 @@ $dataView['title']=TITLE." - Accueil";
 $dataView['zoneHaute']=$views['banniere'];
 $dataView['zoneRecherche']=$views['recherche'];
 $dataView['zoneMenu']=$views['menuNonConnecte'];
-$dataView['zoneCentrale']=$views['accueil'];
+$dataView['zoneCentrale']=$views['consultationListeEvenements'];
 $dataView['css']=$css['stylePrincipal'];
 $dataView['infosEvent'] = $infosEvent;
+$dataView['listeSports'] = $sport->getFiveTopSports();
 // Enregistrement des donnees de la vue dans la session
 $_SESSION['dataView']=$dataView;
 

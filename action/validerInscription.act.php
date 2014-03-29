@@ -18,6 +18,7 @@
 // Modèles utilisés pour les données
 include $models['Modele'];
 include $models['Adresse'];
+include $models['Sport'];
 include $models['Utilisateur'];
 include $models['Organisateur'];
 include $models['Participant'];
@@ -149,10 +150,11 @@ $dataView['zoneRecherche'] = $views['recherche'];
 $dataView['zoneMenu'] = $views['menuNonConnecte'];
 $dataView['message'] = $message;
 $dataView['css'] = $css['stylePrincipal'];
+$dataView['listeSports'] = $sport->getFiveTopSports();
 
 if ($_SESSION['state'] === "nonConnecte_accueil") {
     $dataView['title'] = TITLE . " - Enregistrement valide !";
-    $dataView['zoneCentrale'] = $views['accueil'];
+    $dataView['zoneCentrale'] = $views['consultationListeEvenements'];
 } else {
     $dataView['title'] = TITLE . " - Enregistrement refusé !";
     $dataView['zoneCentrale'] = $views['enregistrement'];

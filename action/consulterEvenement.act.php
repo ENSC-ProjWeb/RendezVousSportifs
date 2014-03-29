@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Inscrire événement
+ * Consulter événement
  * 
- * Action qui permet à un membre de s'inscrire à un événement (etat nonConnecte_accueil)
+ * Action qui permet de consulter la page d'un événement (etat nonConnecte_accueil)
  * 
  */
 
@@ -12,12 +12,12 @@
 // -------------------------------------------------------
 
 include $models["Modele"];
+include $models['Sport'];
 include $models["Adresse"];
-include $models["Sport"];
 include $models["Participant"];
 include $models["Evenement"];
 
-$login = $_SESSION["login"]; 
+if (isset($_SESSION['login'])) { $login = $_SESSION["login"]; }
 $idEvent = filter_input(INPUT_GET, "idEvent");
 
 $participant = new Participant();
@@ -30,36 +30,46 @@ $sport = new Sport();
 $evenement = new Evenement();
 $infosEvenement = $evenement->getInfosEvent($idEvent);
 
-// Je modifie son statut d'inscription
-if ($evenement->preInscrireMembre($idEvent, $login) === true) {
- 
-    $message = "Votre inscription va &ecirc;tre trait&eacute;e par l'organisateur";
-} else {
-    $message = "Votre inscription n'a pas pu &ecirc;tre prise en compte...";
-}
+// Je définis mon niveau de connexion
+$niveauConnexion = definirNiveauDeConnexion($_SESSION['state']);
 
-$statut = $participant->getStatutInscriptionEvent($idEvent, $login);
+if ($niveauConnexion == "connecteParticipant") {
+    // On regarde s'il est déjà inscrit à un événement
+    $statut = $participant->getStatutInscriptionEvent($idEvent, $login);
+}
 
 // -------------------------------------------------------
 // Definir le nouvel etat de l'application
 // -------------------------------------------------------
 
-$_SESSION['state'] = 'connecteParticipant_consultationEvenement';
+$_SESSION['state'] = $niveauConnexion.'_consultationEvenement';
 
 // -------------------------------------------------------
 // Preparer les donnees de la vue resultante
 // -------------------------------------------------------
 
 // Definition des donnees structurelles de la vue
-$dataView['message'] = $message;
 $dataView['title']=TITLE.' - '.$infosEvenement['infosEvent']['nomEvent'];
 $dataView['zoneHaute']=$views['banniere'];
 $dataView['zoneRecherche']=$views['recherche'];
 $dataView['css']=$css['stylePrincipal'];
-$dataView['zoneMenu'] = $views['menuConnecteParticipant'];
-$dataView['infosParticipant'] = $_SESSION['infosParticipant'];
-$dataView['zoneCentrale'] = $views['consultationEvenementConnecte'];
+
+if ($niveauConnexion === 'nonConnecte') {
+    $dataView['zoneMenu'] = $views['menuNonConnecte'];
+    $dataView['zoneCentrale'] = $views['consultationEvenementGlobal'];
+} elseif ($niveauConnexion === 'connecteParticipant') {
+    $dataView['zoneMenu'] = $views['menuConnecteParticipant'];
+    $dataView['infosParticipant'] = $_SESSION['infosParticipant'];
+    $dataView['zoneCentrale'] = $views['consultationEvenementConnecte'];
+} else {
+    $dataView["zoneMenu"] = $views['menuConnecteOrganisateur'];
+    $dataView["infosOrganisateur"] = $_SESSION["infosOrganisateur"];
+    $dataView["zoneCentrale"] = $views["consultationEvenementConnecte"];
+}
+
+// Ensemble des infos liées à l'événement
 $dataView['nomEvent'] = $infosEvenement['infosEvent']['nomEvent'];
+$dataView['descEvent'] = $infosEvenement['infosEvent']['descriptionEvent'];
 $dataView['nomOrganisateur'] = $infosEvenement['infosOrganisateur']['nomOrganisateur'];
 $dataView['sportsAssocies'] = $infosEvenement['sportsAssocies'];
 $dataView['empImagePrincipale'] = $infosEvenement['imagesEvent'][0]['cibleImage'];
@@ -74,6 +84,6 @@ $dataView['listeSports'] = $sport->getFiveTopSports();
 // Enregistrement des donnees de la vue dans la session
 $_SESSION['dataView']=$dataView;
 
-?>  
+
 
 

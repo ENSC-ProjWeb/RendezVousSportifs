@@ -42,7 +42,8 @@ $dataView['zoneMenu']=$views['menuConnecteOrganisateur'];
 $dataView['zoneCentrale']=$views['creationEvenement'];
 $dataView['infosOrganisateur'] = $_SESSION["infosOrganisateur"];
 $dataView['css']=$css['stylePrincipal'];
-$dataView['listeSports'] = $listeSports;
+$dataView['listeSportsDisponibles'] = $listeSports;
+$dataView['listeSports'] = $sport->getFiveTopSports();
 
 // Enregistrement des donnees de la vue dans la session
 $_SESSION['dataView']=$dataView;

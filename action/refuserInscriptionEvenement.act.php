@@ -13,6 +13,7 @@
 
 include $models["Modele"];
 include $models["Adresse"];
+include $models['Sport'];
 include $models["Organisateur"];
 include $models["Participant"];
 include $models["Evenement"];
@@ -22,6 +23,7 @@ $idEvent = $_GET["idEvent"];
 $loginUser = $_GET["login"];
 $organisateur = new Organisateur();
 $evenement = new Evenement();
+$sport = new Sport();
 // -------------------------------------------------------
 // Executer l'action
 // ---------------------------------------------------------
@@ -52,6 +54,7 @@ $dataView["zoneMenu"] = $views['menuConnecteOrganisateur'];
 $dataView["infosOrganisateur"] = $_SESSION["infosOrganisateur"];
 $dataView["zoneCentrale"] = $views["listeInscriptionsEnAttente"];
 $dataView["eventPending"] = $listeEvenementEnAttente;
+$dataView['listeSports'] = $sport->getFiveTopSports();
 
 // Enregistrement des donnees de la vue dans la session
 $_SESSION['dataView']=$dataView;

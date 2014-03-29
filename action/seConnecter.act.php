@@ -18,6 +18,7 @@
 // Modèles utilisés pour les données
 include $models['Modele'];
 include $models['Adresse'];
+include $models['Sport'];
 include $models['Utilisateur'];
 include $models['Organisateur'];
 include $models['Participant'];
@@ -28,7 +29,7 @@ $infosConnexion = recupererInfosConnexion();
 //var_dump($infosConnexion);
 $infosUser = $user->getUtilisateur($infosConnexion["login"]);
 //var_dump($infosUser
-
+$sport = new Sport();
 
 /* ---------------------------------------------------------
  * Executer l'action
@@ -92,7 +93,8 @@ $dataView['zoneHaute'] = $views['banniere'];
 $dataView['zoneRecherche'] = $views['recherche'];
 $dataView['message'] = $message;
 $dataView['css'] = $css['stylePrincipal'];
-$dataView['zoneCentrale'] = $views['accueil'];
+$dataView['zoneCentrale'] = $views['consultationListeEvenements'];
+$dataView['listeSports'] = $sport->getFiveTopSports();
 
 if ($_SESSION['state'] === "connecteParticipant_accueil") {
     $dataView['infosParticipant'] = $_SESSION["infosParticipant"];

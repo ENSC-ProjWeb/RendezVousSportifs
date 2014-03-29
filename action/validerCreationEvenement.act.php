@@ -18,6 +18,7 @@
 // Modèles utilisés pour les données
 include $models['Modele'];
 include $models['Adresse'];
+include $models['Sport'];
 include $models['Utilisateur'];
 include $models['Organisateur'];
 include $models['Participant'];
@@ -34,6 +35,7 @@ $creationEvenement = false;
 
 $image = new Image();                                   // modèle pour les avatars
 $infosLocalisation = recupererInfosLocalisation();      // tableau contenant les infos de localisation
+$sport = new Sport();
 
 /* ---------------------------------------------------------
  * Executer l'action
@@ -100,10 +102,11 @@ $dataView['zoneMenu'] = $views['menuConnecteOrganisateur'];
 $dataView['message'] = utf8_encode($message);
 $dataView['css'] = $css['stylePrincipal'];
 $dataView['infosOrganisateur'] = $_SESSION["infosOrganisateur"];
+$dataView['listeSports'] = $sport->getFiveTopSports();
 
 if ($_SESSION['state'] === "connecteOrganisateur_accueil") {
     $dataView['title'] = TITLE . " - Création valide !";
-    $dataView['zoneCentrale'] = $views['accueil'];
+    $dataView['zoneCentrale'] = $views['consultationListeEvenements'];
     $dataView['infosEvent'] = $infosEvent;
 } else {
     $dataView['title'] = TITLE . " - Création refusé !";

@@ -13,11 +13,13 @@
 // -------------------------------------------------------
 
 include $models["Modele"];
+include $models['Sport'];
 include $models["Adresse"];
 include $models["Evenement"];
 
 $motCle = filter_input(INPUT_POST, 'motCle');
 
+$sport = new Sport();
 // -------------------------------------------------------
 // Executer l'action
 // ---------------------------------------------------------
@@ -46,7 +48,8 @@ $_SESSION['state']=$niveauConnexion.'_consultationResultatRecherche';
 $dataView['title']=TITLE." - Accueil";
 $dataView['zoneHaute']=$views['banniere'];
 $dataView['zoneRecherche']=$views['recherche'];
-$dataView['zoneCentrale']=$views['consultationResultatRecherche'];
+$dataView['zoneCentrale']=$views['consultationListeEvenements'];
+$dataView['listeSports'] = $sport->getFiveTopSports();
 
 if ($niveauConnexion === "nonConnecte") {
     $dataView['zoneMenu']=$views['menuNonConnecte'];

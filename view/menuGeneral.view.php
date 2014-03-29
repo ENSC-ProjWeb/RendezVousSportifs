@@ -2,12 +2,13 @@
 <div id='zoneMenuSports'>
     <h3> Liste des sports </h3>
     <ul>
-        <li><a href='#'>Football</a></li>
-        <li><a href='#'>Rugby</a></li>
-        <li><a href='#'>Natation</a></li>
-        <li><a href='#'>Basketball</a></li>
-        <li><a href='#'>Handball</a></li>
-        <li><a href='#'>Autres sports...</a></li>
+    <?php 
+        foreach ($dataView['listeSports'] as $sport) {
+            $nomSport = $sport['nomSport']; $idSport = $sport['idSport'];
+            echo "<li><a href='index.php?action=consulterListeEvenementsParSport&idSport=$idSport'> $nomSport </a></li>";
+        }
+    ?>
+        <li> <a href="index.php?action=consulterTousLesSports"> Autres sports... </a></li>
     </ul>
 </div>
 
