@@ -25,7 +25,7 @@
             <tr>
                 <td><label for="sportsAssocies">Sports :</label></td>
                 <td><select name="sportsAssocies[]" class="chosen-select" data-placeholder="S&eacute;lectionnez un sport..." multiple style="width:350px;">
-                        <?php foreach ($dataView['listeSports'] as $k=>$v) { $nomSport = $v["nomSport"]; echo "<option value='$nomSport'>$nomSport</option>"; } ?>
+                        <?php foreach ($dataView['listeSportsDisponibles'] as $k=>$v) { $nomSport = $v["nomSport"]; echo "<option value='$nomSport'>$nomSport</option>"; } ?>
                     </select></td>
             </tr>
             <tr>
